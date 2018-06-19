@@ -1,0 +1,10 @@
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('João Pereira', 'Rua do Abacaxi', '10', null, 'Brasil', '38.400-121', true, '00 0000-0000', 123);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Maria Rita Cunhada', 'Rua do Sabiá', '110', 'Apto 101', 'Colina', '11.400-121', true, '00 0000-0000', 3245);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Pedro Cardoso Santos', 'Rua da Bateria', '23', null, 'Morumbi', '54.212-121', true, '00 0000-0000',  125);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Ricardo Gilberto', 'Rua do Motorista', '123', 'Apto 302', 'Aparecida', '38.400-12', true, '00 0000-0000', 1245);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Josué Mariano', 'Av Rio Branco', '321', null, 'Jardins', '56.400-121', true, '00 0000-0000', 245);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Pedro Vac', 'Av Brasil', '100', null, 'Tubalina', '77.400-121', true, '00 0000-0000', 4245);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Henrique Medeiros', 'Rua do Sapo', '1120', 'Apto 201', 'Centro', '12.400-121', true, '00 0000-0000', 45);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Carlos Santana', 'Rua da Manga', '433', null, 'Centro', '31.400-121', true, '00 0000-0000', 5);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Leonardo Medeiros', 'Rua do Músico', '566', null, 'Segismundo Pereira', '38.400-00', true, '00 0000-0000', 12);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Isabela sILVA', 'Rua da Terra', '1233', 'Apto 10', 'Vigilato', '99.400-121', true, '00 0000-0000', 1);
