@@ -9,32 +9,25 @@ public class ResumoLancamento {
 
 	private Long codigo;
 	private String descricao;
-	private BigDecimal numeroDesenho;
-	private LocalDate dataDesenho;
-	private LocalDate dataCadastro;
-	private LocalDate dataLimite;
+	private LocalDate dataConsulta;
+	private LocalDate dataExame;
 	private BigDecimal valor;
-	private BigDecimal pesoPeca;
-	private BigDecimal pesoPorMaterial;
-	private String composicaoQuimica;
-	private String clienteDestino;
-	private Long codFornecedor;
+	private String observacao;
 	private TipoLancamento tipo;
-	private String material;
+	private String exame;
 	private String pessoa;
 
 
-	public ResumoLancamento(Long codigo, String descricao, LocalDate dataDesenho, LocalDate dataCadastro, LocalDate dataLimite,
-			BigDecimal valor, TipoLancamento tipo, String material, String pessoa) {
+	public ResumoLancamento(Long codigo, String descricao, LocalDate dataConsulta, LocalDate dataExame,
+			BigDecimal valor, TipoLancamento tipo, String exame, String pessoa) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
-		this.dataDesenho = dataDesenho;
-		this.dataCadastro = dataCadastro;
-		this.dataLimite = dataLimite;
+		this.dataConsulta = dataConsulta;
+		this.dataExame = dataExame;
 		this.valor = valor;
 		this.tipo = tipo;
-		this.material = material;
+		this.exame = exame;
 		this.pessoa = pessoa;
 	}
 
@@ -54,36 +47,20 @@ public class ResumoLancamento {
 		this.descricao = descricao;
 	}
 
-	public BigDecimal getNumeroDesenho() {
-		return numeroDesenho;
+	public LocalDate getDataConsulta() {
+		return dataConsulta;
 	}
 
-	public void setNumeroDesenho(BigDecimal numeroDesenho) {
-		this.numeroDesenho = numeroDesenho;
+	public void setDataConsulta(LocalDate dataConsulta) {
+		this.dataConsulta = dataConsulta;
 	}
 
-	public LocalDate getDataDesenho() {
-		return dataDesenho;
+	public LocalDate getDataExame() {
+		return dataExame;
 	}
 
-	public void setDataDesenho(LocalDate dataDesenho) {
-		this.dataDesenho = dataDesenho;
-	}
-
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public LocalDate getDataLimite() {
-		return dataLimite;
-	}
-
-	public void setDataLimite(LocalDate dataLimite) {
-		this.dataLimite = dataLimite;
+	public void setDataExame(LocalDate dataExame) {
+		this.dataExame = dataExame;
 	}
 
 	public BigDecimal getValor() {
@@ -94,44 +71,12 @@ public class ResumoLancamento {
 		this.valor = valor;
 	}
 
-	public BigDecimal getPesoPeca() {
-		return pesoPeca;
+	public String getObservacao() {
+		return observacao;
 	}
 
-	public void setPesoPeca(BigDecimal pesoPeca) {
-		this.pesoPeca = pesoPeca;
-	}
-
-	public BigDecimal getPesoPorMaterial() {
-		return pesoPorMaterial;
-	}
-
-	public void setPesoPorMaterial(BigDecimal pesoPorMaterial) {
-		this.pesoPorMaterial = pesoPorMaterial;
-	}
-
-	public String getComposicaoQuimica() {
-		return composicaoQuimica;
-	}
-
-	public void setComposicaoQuimica(String composicaoQuimica) {
-		this.composicaoQuimica = composicaoQuimica;
-	}
-
-	public String getClienteDestino() {
-		return clienteDestino;
-	}
-
-	public void setClienteDestino(String clienteDestino) {
-		this.clienteDestino = clienteDestino;
-	}
-
-	public Long getCodFornecedor() {
-		return codFornecedor;
-	}
-
-	public void setCodFornecedor(Long codFornecedor) {
-		this.codFornecedor = codFornecedor;
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	public TipoLancamento getTipo() {
@@ -142,12 +87,12 @@ public class ResumoLancamento {
 		this.tipo = tipo;
 	}
 
-	public String getMaterial() {
-		return material;
+	public String getExame() {
+		return exame;
 	}
 
-	public void setMaterial(String material) {
-		this.material = material;
+	public void setExame(String exame) {
+		this.exame = exame;
 	}
 
 	public String getPessoa() {
