@@ -1,45 +1,46 @@
 package com.example.ams.api.model;
 
-//import javax.persistence.Column;
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+// import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-//import org.springframework.format.annotation.DateTimeFormat;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "medico")
-public class Medico {
+@Table(name = "periodo")
+public class Periodo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	private String nome;
+
 	@NotNull
-	private String especializacao;
+	@Column(name = "data_inicial")
+	private LocalDate dataInicial;
 	
 	@NotNull
-	private String crm;
-	
-	/*@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@Column(name = "horario_disponivel")
-	private LocalDateTime horarioDisponivel;*/
+	@Column(name = "data_final")
+	private LocalDate dataFinal;
 
 	// @ManyToOne
 	@OneToOne(orphanRemoval = true)
-	@JoinColumn(name = "codigo_pessoa")
-	private Pessoa pessoa;
-	
-	@OneToOne
 	@JoinColumn(name = "codigo_agenda")
 	private Agenda agenda;
 
+	@NotNull
+	private Boolean ativo;
 
 	public Long getCodigo() {
 		return codigo;
@@ -49,36 +50,51 @@ public class Medico {
 		this.codigo = codigo;
 	}
 	
-	public String getEspecializacao() {
-		return especializacao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setEspecializacao(String especializacao) {
-		this.especializacao = especializacao;
-	}
-	
-	public String getCrm() {
-		return crm;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public void setCrm(String crm) {
-		this.crm = crm;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-	
 	public Agenda getAgenda() {
 		return agenda;
 	}
 
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
+	}
+
+	public LocalDate getDataInicial() {
+		return dataInicial;
+	}
+
+	public void setDataInicial(LocalDate dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+	
+	public LocalDate getDataFinal() {
+		return dataFinal;
+	}
+
+	public void setDataFinal(LocalDate dataFinal) {
+		this.dataFinal = dataFinal;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+
+	@JsonIgnore
+	@Transient
+	public boolean isInativo() {
+		return !this.ativo;
 	}
 
 	@Override
@@ -97,7 +113,7 @@ public class Medico {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Medico other = (Medico) obj;
+		Periodo other = (Periodo) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;

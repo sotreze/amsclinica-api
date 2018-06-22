@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+import com.example.ams.api.model.Agenda_;
 import com.example.ams.api.model.Medico;
 import com.example.ams.api.model.Medico_;
 import com.example.ams.api.model.Pessoa_;
@@ -51,7 +52,9 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
 
 		criteria.select(builder.construct(ResumoMedico.class
 				, root.get(Medico_.codigo), root.get(Medico_.especializacao)
-				, root.get(Medico_.pessoa).get(Pessoa_.nome)));
+				, root.get(Medico_.pessoa).get(Pessoa_.nome)
+				, root.get(Medico_.agenda).get(Agenda_.codigo)
+				, root.get(Medico_.agenda).get(Agenda_.ativo)));
 
 		Predicate[] predicates = criarRestricoes(medicoFilter, builder, root);
 		criteria.where(predicates);

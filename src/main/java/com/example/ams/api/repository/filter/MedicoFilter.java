@@ -1,8 +1,9 @@
 package com.example.ams.api.repository.filter;
 
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+
+//import org.joda.time.DateTime;
+//import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class MedicoFilter {
@@ -11,8 +12,11 @@ public class MedicoFilter {
 
 	private String crm;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	/*@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private DateTime horarioDisponivelDe;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private DateTime horarioDisponivelAte;*/
 
 
 	public String getEspecializacao() {
@@ -31,7 +35,7 @@ public class MedicoFilter {
 		this.crm = crm;
 	}
 
-	public DateTime getHorarioDisponivelDe() {
+	/*public DateTime getHorarioDisponivelDe() {
 		return horarioDisponivelDe;
 	}
 
@@ -39,4 +43,11 @@ public class MedicoFilter {
 		this.horarioDisponivelDe = horarioDisponivelDe;
 	}
 
+	public DateTime getHorarioDisponivelAte() {
+		return horarioDisponivelAte;
+	}
+
+	public void setHorarioDisponivelAte(DateTime horarioDisponivelAte) {
+		this.horarioDisponivelAte = horarioDisponivelAte;
+	}*/
 }
