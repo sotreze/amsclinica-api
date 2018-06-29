@@ -1,21 +1,23 @@
 package com.example.ams.api.repository.projection;
 
-import org.joda.time.DateTime;
 
 
 public class ResumoMedico {
 
 	private Long codigo;
 	private String especializacao;
-	private DateTime horarioDisponivel;
 	private String crm;
+	private String agenda;
+	private String pessoa;
 
-	public ResumoMedico(Long codigo, String especializacao,  DateTime horarioDisponivel, String crm) {
+	public ResumoMedico(Long codigo, String especializacao, String crm, String agenda, String pessoa) {
 		super();
 		this.codigo = codigo;
 		this.especializacao = especializacao;
-		this.horarioDisponivel = horarioDisponivel;
 		this.crm = crm;
+		this.agenda = agenda;
+		this.pessoa = pessoa;
+		
 	}
 
 
@@ -35,14 +37,6 @@ public class ResumoMedico {
 		this.especializacao = especializacao;
 	}
 
-	public DateTime getHorarioDisponivel() {
-		return horarioDisponivel;
-	}
-
-	public void setHorarioDisponivel(DateTime horarioDisponivel) {
-		this.horarioDisponivel = horarioDisponivel;
-	}
-
 	public String getCrm() {
 		return crm;
 	}
@@ -50,6 +44,23 @@ public class ResumoMedico {
 	public void setCrm(String crm) {
 		this.crm = crm;
 	}
+	
+	public String getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(String agenda) {
+		this.agenda = agenda;
+	}
+	
+	public String getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(String pessoa) {
+		this.pessoa = pessoa;
+	}
+
 
 
 }

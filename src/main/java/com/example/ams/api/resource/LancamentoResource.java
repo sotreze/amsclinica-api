@@ -44,6 +44,7 @@ import com.example.ams.api.repository.LancamentoRepository;
 import com.example.ams.api.repository.filter.LancamentoFilter;
 import com.example.ams.api.repository.projection.ResumoLancamento;
 import com.example.ams.api.service.LancamentoService;
+import com.example.ams.api.service.exception.AgendaInexistenteOuInativaException;
 import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
 import com.example.ams.api.storage.S3;
 
@@ -128,6 +129,14 @@ public class LancamentoResource {
 	@ExceptionHandler({ PessoaInexistenteOuInativaException.class })
 	public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex) {
 		String mensagemUsuario = messageSource.getMessage("pessoa.inexistente-ou-inativa", null, LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor = ex.toString();
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		return ResponseEntity.badRequest().body(erros);
+	}
+	
+	@ExceptionHandler({ AgendaInexistenteOuInativaException.class })
+	public ResponseEntity<Object> handleAgendaInexistenteOuInativaException(AgendaInexistenteOuInativaException ex) {
+		String mensagemUsuario = messageSource.getMessage("agenda.inexistente-ou-inativa", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return ResponseEntity.badRequest().body(erros);

@@ -153,6 +153,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 				, root.get(Lancamento_.dataConsulta), root.get(Lancamento_.dataExame)
 				, root.get(Lancamento_.valor), root.get(Lancamento_.tipo)
 				, root.get(Lancamento_.exame).get(Exame_.nome)
+				, root.get(Lancamento_.pessoa)
 				, root.get(Lancamento_.observacao)
 				, root.get(Lancamento_.pessoa).get(Pessoa_.nome)));
 
@@ -182,6 +183,11 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		if (lancamentoFilter.getDataConsultaAte() != null) {
 			predicates.add(
 					builder.lessThanOrEqualTo(root.get(Lancamento_.dataConsulta), lancamentoFilter.getDataConsultaAte()));
+		}
+		
+		if (!StringUtils.isEmpty(lancamentoFilter.getPessoa())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Lancamento_.pessoa).get(Pessoa_.nome)), "%" + lancamentoFilter.getPessoa().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

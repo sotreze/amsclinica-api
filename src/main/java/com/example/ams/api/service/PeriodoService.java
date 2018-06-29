@@ -27,9 +27,9 @@ public class PeriodoService {
 
 	public Periodo atualizar(Long codigo, Periodo periodo) {
 		Periodo periodoSalvo = buscarPeriodoExistente(codigo);
-		if (!periodo.getAgenda().equals(periodoSalvo.getAgenda())) {
-			//validarAgenda(periodo);
-		}
+		/*if (!periodo.getAgenda().equals(periodoSalvo.getAgenda())) {
+			validarAgenda(periodo);
+		}*/
 
 		BeanUtils.copyProperties(periodo, periodoSalvo, "codigo");
 

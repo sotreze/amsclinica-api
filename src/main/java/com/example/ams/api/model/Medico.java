@@ -31,15 +31,14 @@ public class Medico {
 	@Column(name = "horario_disponivel")
 	private LocalDateTime horarioDisponivel;*/
 
-	// @ManyToOne
 	@OneToOne(orphanRemoval = true)
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 	
+	//@NotNull
 	@OneToOne
 	@JoinColumn(name = "codigo_agenda")
 	private Agenda agenda;
-
 
 	public Long getCodigo() {
 		return codigo;
@@ -68,10 +67,10 @@ public class Medico {
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
-
+	
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
-	}
+	}	
 	
 	public Agenda getAgenda() {
 		return agenda;
@@ -80,6 +79,7 @@ public class Medico {
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
 	}
+
 
 	@Override
 	public int hashCode() {

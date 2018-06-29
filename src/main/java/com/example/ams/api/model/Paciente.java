@@ -21,7 +21,7 @@ public class Paciente {
 	
 	private String cpf;
 
-	@ManyToOne
+	//@ManyToOne
 	@OneToOne(orphanRemoval = true)
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;

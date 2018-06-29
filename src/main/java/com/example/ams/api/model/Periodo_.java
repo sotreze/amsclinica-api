@@ -15,6 +15,5 @@ public abstract class Periodo_ {
 	public static volatile SingularAttribute<Periodo, LocalDate> dataInicial;
 	public static volatile SingularAttribute<Periodo, LocalDate> dataFinal;
 	public static volatile SingularAttribute<Periodo, Boolean> ativo;
-	public static volatile SingularAttribute<Periodo, Agenda> agenda;
 
 }

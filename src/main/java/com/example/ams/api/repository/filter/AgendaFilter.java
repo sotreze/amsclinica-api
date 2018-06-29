@@ -1,43 +1,43 @@
 package com.example.ams.api.repository.filter;
 
+import java.time.LocalDateTime;
 
-import java.time.LocalTime;
-
-//import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class AgendaFilter {
-
-	private String diaSemana;
-
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalTime horaDe;
 	
-	private LocalTime horaAte;
+	
+	private Boolean ativo;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime dataHoraDe;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime dataHoraAte;
 
-	public String getDiaSemana() {
-		return diaSemana;
+	public LocalDateTime getDataHoraDe() {
+		return dataHoraDe;
 	}
 
-	public void setDiaSemana(String diaSemana) {
-		this.diaSemana = diaSemana;
+	public void setDataHoraDe(LocalDateTime dataHoraDe) {
+		this.dataHoraDe = dataHoraDe;
 	}
 
-	public LocalTime getHora() {
-		return horaDe;
+	public LocalDateTime getDataHoraAte() {
+		return dataHoraAte;
 	}
 
-	public void setHora(LocalTime horaDe) {
-		this.horaDe = horaDe;
+	public void setDataHoraAte(LocalDateTime dataHoraAte) {
+		this.dataHoraAte = dataHoraAte;
 	}
 	
-	public LocalTime getHoraAte() {
-		return horaAte;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setHoraAte(LocalTime horaAte) {
-		this.horaAte = horaAte;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

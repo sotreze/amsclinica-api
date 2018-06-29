@@ -1,12 +1,14 @@
 package com.example.ams.api.service;
 
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.ams.api.model.Agenda;
-import com.example.ams.api.repository.AgendaRepository;
 //import com.example.ams.api.model.Medico;
+import com.example.ams.api.repository.AgendaRepository;
 //import com.example.ams.api.repository.MedicoRepository;
 //import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
 
@@ -26,14 +28,19 @@ public class AgendaService {
 	}
 
 	public Agenda atualizar(Long codigo, Agenda agenda) {
-		Agenda agendaSalva = buscarAgendaExistente(codigo);
+		Agenda agendaSalva = buscarAgendaPeloCodigo(codigo);
 		/*if (!agenda.getMedico().equals(agendaSalva.getMedico())) {
 			validarMedico(agenda);
 		}*/
 
 		BeanUtils.copyProperties(agenda, agendaSalva, "codigo");
-
 		return agendaRepository.save(agendaSalva);
+	}
+	
+	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
+		Agenda agendaSalva = buscarAgendaPeloCodigo(codigo);
+		agendaSalva.setAtivo(ativo);
+		agendaRepository.save(agendaSalva);
 	}
 
 	/*private void validarMedico(Agenda agenda) {
@@ -42,17 +49,17 @@ public class AgendaService {
 			medico = medicoRepository.findOne(agenda.getMedico().getCodigo());
 		}
 
-		if (medico == null || medico.getPessoa().isInativo()) {
+		if (pessoa == null || pessoa.isInativo()) {
 			throw new PessoaInexistenteOuInativaException();
 		}
 	}*/
 
-	private Agenda buscarAgendaExistente(Long codigo) {
+	private Agenda buscarAgendaPeloCodigo(Long codigo) {
 		Agenda agendaSalva = agendaRepository.findOne(codigo);
 		if (agendaSalva == null) {
-			throw new IllegalArgumentException();
+			throw new EmptyResultDataAccessException(1);
 		}
 		return agendaSalva;
 	}
-
+	
 }

@@ -18,7 +18,6 @@ import org.springframework.util.StringUtils;
 
 import com.example.ams.api.model.Periodo;
 import com.example.ams.api.model.Periodo_;
-import com.example.ams.api.model.Agenda_;
 import com.example.ams.api.repository.filter.PeriodoFilter;
 import com.example.ams.api.repository.projection.ResumoPeriodo;
 
@@ -49,8 +48,11 @@ public class PeriodoRepositoryImpl implements PeriodoRepositoryQuery {
 		Root<Periodo> root = criteria.from(Periodo.class);
 
 		criteria.select(builder.construct(ResumoPeriodo.class
-				, root.get(Periodo_.codigo), root.get(Periodo_.ativo)
-				, root.get(Periodo_.agenda).get(Agenda_.codigo)));
+				, root.get(Periodo_.codigo)
+				, root.get(Periodo_.nome)
+				, root.get(Periodo_.ativo)
+				, root.get(Periodo_.dataInicial)
+				, root.get(Periodo_.dataFinal)));
 
 		Predicate[] predicates = criarRestricoes(periodoFilter, builder, root);
 		criteria.where(predicates);

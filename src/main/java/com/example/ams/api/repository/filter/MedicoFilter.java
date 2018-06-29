@@ -7,6 +7,10 @@ package com.example.ams.api.repository.filter;
 
 
 public class MedicoFilter {
+	
+	private String pessoa;
+
+	private String agenda;
 
 	private String especializacao;
 
@@ -18,6 +22,21 @@ public class MedicoFilter {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private DateTime horarioDisponivelAte;*/
 
+	public String getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(String pessoa) {
+		this.pessoa = pessoa;
+	}
+	
+	public String getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(String agenda) {
+		this.agenda = agenda;
+	}
 
 	public String getEspecializacao() {
 		return especializacao;

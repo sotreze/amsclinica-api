@@ -7,4 +7,4 @@ INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, t
 INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Henrique Medeiros', 'Rua do Sapo', '1120', 'Apto 201', 'Centro', '12.400-121', true, '00 0000-0000', 45);
 INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Carlos Santana', 'Rua da Manga', '433', null, 'Centro', '31.400-121', true, '00 0000-0000', 5);
 INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Leonardo Medeiros', 'Rua do Músico', '566', null, 'Segismundo Pereira', '38.400-00', true, '00 0000-0000', 12);
-INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Isabela sILVA', 'Rua da Terra', '1233', 'Apto 10', 'Vigilato', '99.400-121', true, '00 0000-0000', 1);
+INSERT INTO pessoa (nome, logradouro, numero, complemento, bairro, cep, ativo, telefone, codigo_cidade) values ('Isabela Silva', 'Rua da Terra', '1233', 'Apto 10', 'Vigilato', '99.400-121', true, '00 0000-0000', 1);

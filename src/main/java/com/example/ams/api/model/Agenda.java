@@ -1,19 +1,18 @@
 package com.example.ams.api.model;
 
-import java.time.LocalTime;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
+//import javax.persistence.Convert;
+import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-// import javax.persistence.ManyToOne;
-//import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -23,19 +22,15 @@ public class Agenda {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-
+	
 	@NotNull
-	@Column(name = "dia_semana")
-	private String diaSemana;
-
-	private LocalTime hora;
-
-	/* @ManyToOne
-	@OneToOne(orphanRemoval = true)
-	@JoinColumn(name = "codigo_medico")
-	private Medico medico;*/
-
-	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@Column(name="data_hora")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime dataHora;
+	
+    //@Column
+    //@Convert(converter = BooleanSimNaoConverter.class)
 	private Boolean ativo;
 
 	public Long getCodigo() {
@@ -45,23 +40,16 @@ public class Agenda {
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
+	
 
-	public String getDiaSemana() {
-		return diaSemana;
+	public LocalDateTime getDataHora() {
+		return dataHora;
 	}
 
-	public void setDiaSemana(String diaSemana) {
-		this.diaSemana = diaSemana;
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
 	}
-
-	public LocalTime getHora() {
-		return hora;
-	}
-
-	public void setHora(LocalTime hora) {
-		this.hora = hora;
-	}
-
+	
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -70,12 +58,12 @@ public class Agenda {
 		this.ativo = ativo;
 	}
 
-
 	@JsonIgnore
 	@Transient
 	public boolean isInativo() {
 		return !this.ativo;
 	}
+	
 
 	@Override
 	public int hashCode() {

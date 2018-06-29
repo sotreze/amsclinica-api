@@ -73,6 +73,11 @@ public class PacienteRepositoryImpl implements PacienteRepositoryQuery {
 			predicates.add(builder.like(
 					builder.lower(root.get(Paciente_.cpf)), "%" + pacienteFilter.getCpf().toLowerCase() + "%"));
 		}
+		
+		if (!StringUtils.isEmpty(pacienteFilter.getPessoa())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Paciente_.pessoa).get(Pessoa_.nome)), "%" + pacienteFilter.getPessoa().toLowerCase() + "%"));
+		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

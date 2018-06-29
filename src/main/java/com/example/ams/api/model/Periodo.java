@@ -7,9 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
 // import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -34,10 +34,10 @@ public class Periodo {
 	@Column(name = "data_final")
 	private LocalDate dataFinal;
 
-	// @ManyToOne
+	/* @ManyToOne
 	@OneToOne(orphanRemoval = true)
 	@JoinColumn(name = "codigo_agenda")
-	private Agenda agenda;
+	private Agenda agenda;*/
 
 	@NotNull
 	private Boolean ativo;
@@ -58,13 +58,13 @@ public class Periodo {
 		this.nome = nome;
 	}
 
-	public Agenda getAgenda() {
+	/*public Agenda getAgenda() {
 		return agenda;
 	}
 
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
-	}
+	}*/
 
 	public LocalDate getDataInicial() {
 		return dataInicial;

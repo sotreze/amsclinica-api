@@ -53,8 +53,8 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
 		criteria.select(builder.construct(ResumoMedico.class
 				, root.get(Medico_.codigo), root.get(Medico_.especializacao)
 				, root.get(Medico_.pessoa).get(Pessoa_.nome)
-				, root.get(Medico_.agenda).get(Agenda_.codigo)
-				, root.get(Medico_.agenda).get(Agenda_.ativo)));
+				, root.get(Medico_.agenda).get(Agenda_.dataHora)
+				, root.get(Medico_.crm)));
 
 		Predicate[] predicates = criarRestricoes(medicoFilter, builder, root);
 		criteria.where(predicates);
@@ -72,6 +72,11 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
 		if (!StringUtils.isEmpty(medicoFilter.getEspecializacao())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(Medico_.especializacao)), "%" + medicoFilter.getEspecializacao().toLowerCase() + "%"));
+		}
+		
+		if (!StringUtils.isEmpty(medicoFilter.getPessoa())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Medico_.pessoa).get(Pessoa_.nome)), "%" + medicoFilter.getPessoa().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

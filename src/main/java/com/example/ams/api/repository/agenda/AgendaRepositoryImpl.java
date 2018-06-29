@@ -3,18 +3,21 @@ package com.example.ams.api.repository.agenda;
 import java.util.ArrayList;
 import java.util.List;
 
+//import java.util.ArrayList;
+//import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+//import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.util.StringUtils;
 
 import com.example.ams.api.model.Agenda;
 import com.example.ams.api.model.Agenda_;
@@ -50,7 +53,9 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 
 		criteria.select(builder.construct(ResumoAgenda.class
 				, root.get(Agenda_.codigo)
-				, root.get(Agenda_.diaSemana)));
+				, root.get(Agenda_.ativo)
+				, root.get(Agenda_.dataHora)));
+
 
 		Predicate[] predicates = criarRestricoes(agendaFilter, builder, root);
 		criteria.where(predicates);
@@ -65,13 +70,19 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 			Root<Agenda> root) {
 		List<Predicate> predicates = new ArrayList<>();
 
-		if (!StringUtils.isEmpty(agendaFilter.getDiaSemana())) {
-			predicates.add(builder.like(
-					builder.lower(root.get(Agenda_.diaSemana)), "%" + agendaFilter.getDiaSemana().toLowerCase() + "%"));
+		if (agendaFilter.getDataHoraDe() != null) {
+			predicates.add(
+					builder.greaterThanOrEqualTo(root.get(Agenda_.dataHora), agendaFilter.getDataHoraDe()));
+		}
+
+		if (agendaFilter.getDataHoraAte() != null) {
+			predicates.add(
+					builder.lessThanOrEqualTo(root.get(Agenda_.dataHora), agendaFilter.getDataHoraAte()));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
+	
 
 	private void adicionarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
 		int paginaAtual = pageable.getPageNumber();
