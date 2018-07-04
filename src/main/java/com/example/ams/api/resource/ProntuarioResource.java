@@ -1,5 +1,8 @@
 package com.example.ams.api.resource;
 
+import java.io.IOException;
+
+
 //import java.util.Arrays;
 //import java.util.List;
 
@@ -23,8 +26,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.ams.api.dto.Anexo;
 import com.example.ams.api.event.RecursoCriadoEvent;
 //import com.example.ams.api.exceptionhandler.AmsExceptionHandler.Erro;
 import com.example.ams.api.model.Prontuario;
@@ -33,6 +40,8 @@ import com.example.ams.api.repository.filter.ProntuarioFilter;
 import com.example.ams.api.repository.projection.ResumoProntuario;
 import com.example.ams.api.service.ProntuarioService;
 //import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
+
+import com.example.ams.api.storage.S3;
 
 @RestController
 @RequestMapping("/prontuarios")
@@ -49,6 +58,16 @@ public class ProntuarioResource {
 
 	//@Autowired
 	//private MessageSource messageSource;
+	
+	@Autowired
+	private S3 s3;
+	
+	@PostMapping("/anexo")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PRONTUARIO') and #oauth2.hasScope('write')")
+	public Anexo uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
+		String nome = s3.salvarTemporariamente(anexo);
+		return new Anexo(nome, s3.configurarUrl(nome));
+	}
 
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRONTUARIO') and #oauth2.hasScope('read')")
@@ -68,14 +87,15 @@ public class ProntuarioResource {
 		Prontuario prontuario = prontuarioRepository.findOne(codigo);
 		 return prontuario != null ? ResponseEntity.ok(prontuario) : ResponseEntity.notFound().build();
 	}
-
+	
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PRONTUARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Prontuario> criar(@Valid @RequestBody Prontuario prontuario, HttpServletResponse response) {
-		Prontuario prontuarioSalvo = prontuarioRepository.save(prontuario);
+		Prontuario prontuarioSalvo = prontuarioService.salvar(prontuario);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, prontuarioSalvo.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(prontuarioSalvo);
 	}
+
 
 	/*@ExceptionHandler({ PessoaInexistenteOuInativaException.class })
 	public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex) {

@@ -30,9 +30,9 @@ public class Paciente {
 	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
 	
-	@OneToOne(orphanRemoval = true)
+	/*@OneToOne(orphanRemoval = true)
 	@JoinColumn(name = "codigo_prontuario")
-	private Prontuario prontuario;
+	private Prontuario prontuario;*/
 
 	public Long getCodigo() {
 		return codigo;
@@ -66,13 +66,13 @@ public class Paciente {
 		this.categoria = categoria;
 	}
 	
-	public Prontuario getProntuario() {
+	/*public Prontuario getProntuario() {
 		return prontuario;
 	}
 
 	public void setProntuario(Prontuario prontuario) {
 		this.prontuario = prontuario;
-	}
+	}*/
 
 
 	@Override

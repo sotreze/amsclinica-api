@@ -10,7 +10,6 @@ public abstract class Paciente_ {
 
 	public static volatile SingularAttribute<Paciente, Long> codigo;
 	public static volatile SingularAttribute<Paciente, String> cpf;
-	public static volatile SingularAttribute<Paciente, Prontuario> prontuario;
 	public static volatile SingularAttribute<Paciente, Pessoa> pessoa;
 	public static volatile SingularAttribute<Paciente, Categoria> categoria;
 

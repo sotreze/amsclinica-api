@@ -3,20 +3,22 @@ package com.example.ams.api.repository.filter;
 
 public class ProntuarioFilter {
 
-	private String exame;
 
+	private String pessoa;
+	
 	private String receita;
 
 	private String relatorio;
 	
-	public String getExame() {
-		return exame;
+
+	public String getPessoa() {
+		return pessoa;
 	}
 
-	public void setExame(String exame) {
-		this.exame = exame;
+	public void setPessoa(String pessoa) {
+		this.pessoa = pessoa;
 	}
-
+	
 	public String getReceita() {
 		return receita;
 	}

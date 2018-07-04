@@ -8,7 +8,7 @@ public class PacienteFilter {
 	
 	private String categoria;
 
-	private String prontuario;
+	//private String prontuario;
 	
 	public String getCpf() {
 		return cpf;
@@ -34,12 +34,12 @@ public class PacienteFilter {
 		this.categoria = categoria;
 	}
 
-	public String getProntuario() {
+	/*public String getProntuario() {
 		return prontuario;
 	}
 
 	public void setProntuario(String prontuario) {
 		this.prontuario = prontuario;
-	}
+	}*/
 
 }

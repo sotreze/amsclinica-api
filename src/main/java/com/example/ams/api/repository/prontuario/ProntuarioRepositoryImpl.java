@@ -16,6 +16,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+
+import com.example.ams.api.model.Pessoa_;
 import com.example.ams.api.model.Prontuario;
 import com.example.ams.api.model.Prontuario_;
 import com.example.ams.api.repository.filter.ProntuarioFilter;
@@ -49,7 +51,7 @@ public class ProntuarioRepositoryImpl implements ProntuarioRepositoryQuery {
 		Root<Prontuario> root = criteria.from(Prontuario.class);
 
 		criteria.select(builder.construct(ResumoProntuario.class
-				, root.get(Prontuario_.codigo), root.get(Prontuario_.exame)
+				, root.get(Prontuario_.codigo)
 				, root.get(Prontuario_.receita)
 				, root.get(Prontuario_.relatorio)));
 
@@ -66,10 +68,16 @@ public class ProntuarioRepositoryImpl implements ProntuarioRepositoryQuery {
 			Root<Prontuario> root) {
 		List<Predicate> predicates = new ArrayList<>();
 
-		if (!StringUtils.isEmpty(prontuarioFilter.getExame())) {
+		if (!StringUtils.isEmpty(prontuarioFilter.getRelatorio())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Prontuario_.exame)), "%" + prontuarioFilter.getExame().toLowerCase() + "%"));
+					builder.lower(root.get(Prontuario_.relatorio)), "%" + prontuarioFilter.getRelatorio().toLowerCase() + "%"));
 		}
+		
+		if (!StringUtils.isEmpty(prontuarioFilter.getPessoa())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Prontuario_.pessoa).get(Pessoa_.nome)), "%" + prontuarioFilter.getPessoa().toLowerCase() + "%"));
+		}
+
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

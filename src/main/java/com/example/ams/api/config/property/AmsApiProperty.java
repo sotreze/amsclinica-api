@@ -39,7 +39,7 @@ public class AmsApiProperty {
 
 		private String secretAccessKey;
 
-		private String bucket = "ms-ams-arquivos";
+		private String bucket = "server-ams-arquivos";
 
 		public String getBucket() {
 			return bucket;

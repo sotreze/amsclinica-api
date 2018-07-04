@@ -73,6 +73,7 @@ public class LancamentoResource {
 	public Anexo uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
 		String nome = s3.salvarTemporariamente(anexo);
 		return new Anexo(nome, s3.configurarUrl(nome));
+
 	}
 
 	@GetMapping("/relatorios/por-pessoa")

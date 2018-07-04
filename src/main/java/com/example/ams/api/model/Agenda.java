@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+//import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -32,6 +35,14 @@ public class Agenda {
     //@Column
     //@Convert(converter = BooleanSimNaoConverter.class)
 	private Boolean ativo;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigo_medico")
+	private Medico medico;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigo_pessoa")
+	private Pessoa pessoa;
 
 	public Long getCodigo() {
 		return codigo;
@@ -56,6 +67,22 @@ public class Agenda {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+	
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+	
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	@JsonIgnore

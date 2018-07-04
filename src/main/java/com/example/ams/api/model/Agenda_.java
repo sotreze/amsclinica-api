@@ -13,4 +13,6 @@ public abstract class Agenda_ {
 	public static volatile SingularAttribute<Agenda, Long> codigo;
 	public static volatile SingularAttribute<Agenda, Boolean> ativo;
 	public static volatile SingularAttribute<Agenda, LocalDateTime> dataHora;
+	public static volatile SingularAttribute<Agenda, Medico> medico;
+	public static volatile SingularAttribute<Agenda, Pessoa> pessoa;
 }

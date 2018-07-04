@@ -3,9 +3,7 @@ CREATE TABLE Paciente (
 	cpf VARCHAR(30),
 	codigo_pessoa BIGINT(20),
 	codigo_categoria BIGINT(20),
-	codigo_prontuario BIGINT(20),
 	FOREIGN KEY (codigo_pessoa) REFERENCES pessoa(codigo),
 	FOREIGN KEY (codigo_categoria) REFERENCES categoria(codigo),
-	FOREIGN KEY (codigo_prontuario) REFERENCES prontuario(codigo),
 	UNIQUE (codigo_pessoa)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

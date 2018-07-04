@@ -1,16 +1,23 @@
 package com.example.ams.api.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.example.ams.api.repository.listener.ProntuarioAnexoListener;
 
 // import org.hibernate.validator.constraints.Email;
 // import org.hibernate.validator.constraints.NotEmpty;
 
+@EntityListeners(ProntuarioAnexoListener.class)
 @Entity
 @Table(name = "prontuario")
 public class Prontuario {
@@ -21,12 +28,21 @@ public class Prontuario {
 	
 	//@ManyToOne
 	//@JoinColumn(name = "codigo_exame")
-	private String exame;
+	//private String exame;
+	
+	private String anexo;
+
+	@Transient
+	private String urlAnexo;
 	
 	private String receita;
 	
 	//@NotEmpty
 	private String relatorio;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigo_pessoa")
+	private Pessoa pessoa;
 
 	public Long getCodigo() {
 		return codigo;
@@ -36,13 +52,13 @@ public class Prontuario {
 		this.codigo = codigo;
 	}
 
-	public String getExame() {
+	/*public String getExame() {
 		return exame;
 	}
 
 	public void setExame(String exame) {
 		this.exame = exame;
-	}
+	}*/
 
 	public String getReceita() {
 		return receita;
@@ -58,6 +74,33 @@ public class Prontuario {
 
 	public void setRelatorio(String relatorio) {
 		this.relatorio = relatorio;
+	}
+	
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+	
+	public String getAnexo() {
+		return anexo;
+	}
+
+
+	public void setAnexo(String anexo) {
+		this.anexo = anexo;
+	}
+
+
+	public String getUrlAnexo() {
+		return urlAnexo;
+	}
+
+
+	public void setUrlAnexo(String urlAnexo) {
+		this.urlAnexo = urlAnexo;
 	}
 
 	@Override
