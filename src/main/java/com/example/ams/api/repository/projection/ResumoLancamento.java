@@ -15,11 +15,11 @@ public class ResumoLancamento {
 	private String observacao;
 	private TipoLancamento tipo;
 	private String exame;
-	private String pessoa;
+	private String paciente;
 
 
 	public ResumoLancamento(Long codigo, String descricao, LocalDate dataConsulta, LocalDate dataExame,
-			BigDecimal valor, TipoLancamento tipo, String exame, String pessoa) {
+			BigDecimal valor, TipoLancamento tipo, String exame, String paciente) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
@@ -28,7 +28,7 @@ public class ResumoLancamento {
 		this.valor = valor;
 		this.tipo = tipo;
 		this.exame = exame;
-		this.pessoa = pessoa;
+		this.paciente = paciente;
 	}
 
 	public Long getCodigo() {
@@ -95,12 +95,12 @@ public class ResumoLancamento {
 		this.exame = exame;
 	}
 
-	public String getPessoa() {
-		return pessoa;
+	public String getPaciente() {
+		return paciente;
 	}
 
-	public void setPessoa(String pessoa) {
-		this.pessoa = pessoa;
+	public void setPaciente(String paciente) {
+		this.paciente = paciente;
 	}
 
 }

@@ -28,14 +28,14 @@ public class Medico {
 	private Long codigo;
 	
 	@NotNull
+	private String nome;
+	
+	@NotNull
 	private String especializacao;
 	
 	@NotNull
 	private String crm;
-	
-	/*@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@Column(name = "horario_disponivel")
-	private LocalDateTime horarioDisponivel;*/
+
 
 	@OneToOne(orphanRemoval = true)
 	@JoinColumn(name = "codigo_pessoa")
@@ -62,6 +62,14 @@ public class Medico {
 	
 	public String getEspecializacao() {
 		return especializacao;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public void setEspecializacao(String especializacao) {
@@ -92,13 +100,13 @@ public class Medico {
 		this.agenda = agenda;
 	}*/
 	
-	public List<Agenda> getAgendas() {
+	/*public List<Agenda> getAgendas() {
 		return agendas;
 	}
 	
 	public void setAgendas(List<Agenda> agendas) {
 		this.agendas = agendas;
-	}
+	}*/
 
 
 	@Override

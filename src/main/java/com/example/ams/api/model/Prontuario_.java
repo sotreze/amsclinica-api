@@ -11,6 +11,6 @@ public abstract class Prontuario_ {
 	public static volatile SingularAttribute<Prontuario, Long> codigo;
 	public static volatile SingularAttribute<Prontuario, String> receita;
 	public static volatile SingularAttribute<Prontuario, String> relatorio;
-	public static volatile SingularAttribute<Prontuario, Pessoa> pessoa;
+	public static volatile SingularAttribute<Prontuario, Paciente> paciente;
 
 }

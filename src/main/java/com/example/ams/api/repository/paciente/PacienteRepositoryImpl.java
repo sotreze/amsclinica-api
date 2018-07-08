@@ -18,7 +18,6 @@ import org.springframework.util.StringUtils;
 
 import com.example.ams.api.model.Paciente;
 import com.example.ams.api.model.Paciente_;
-import com.example.ams.api.model.Pessoa_;
 //import com.example.ams.api.model.Prontuario_;
 import com.example.ams.api.repository.filter.PacienteFilter;
 import com.example.ams.api.repository.projection.ResumoPaciente;
@@ -52,9 +51,7 @@ public class PacienteRepositoryImpl implements PacienteRepositoryQuery {
 
 		criteria.select(builder.construct(ResumoPaciente.class
 				, root.get(Paciente_.codigo) 
-				, root.get(Paciente_.cpf)
-				//, root.get(Paciente_.prontuario).get(Prontuario_.relatorio)
-				, root.get(Paciente_.pessoa).get(Pessoa_.nome)));
+				, root.get(Paciente_.nome)));
 
 		Predicate[] predicates = criarRestricoes(pacienteFilter, builder, root);
 		criteria.where(predicates);
@@ -69,14 +66,9 @@ public class PacienteRepositoryImpl implements PacienteRepositoryQuery {
 			Root<Paciente> root) {
 		List<Predicate> predicates = new ArrayList<>();
 
-		if (!StringUtils.isEmpty(pacienteFilter.getCpf())) {
+		if (!StringUtils.isEmpty(pacienteFilter.getNome())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Paciente_.cpf)), "%" + pacienteFilter.getCpf().toLowerCase() + "%"));
-		}
-		
-		if (!StringUtils.isEmpty(pacienteFilter.getPessoa())) {
-			predicates.add(builder.like(
-					builder.lower(root.get(Paciente_.pessoa).get(Pessoa_.nome)), "%" + pacienteFilter.getPessoa().toLowerCase() + "%"));
+					builder.lower(root.get(Paciente_.nome)), "%" + pacienteFilter.getNome().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

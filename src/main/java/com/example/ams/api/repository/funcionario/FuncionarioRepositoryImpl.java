@@ -18,7 +18,6 @@ import org.springframework.util.StringUtils;
 
 import com.example.ams.api.model.Funcionario;
 import com.example.ams.api.model.Funcionario_;
-import com.example.ams.api.model.Pessoa_;
 import com.example.ams.api.repository.filter.FuncionarioFilter;
 import com.example.ams.api.repository.projection.ResumoFuncionario;
 
@@ -51,8 +50,9 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepositoryQuery {
 
 		criteria.select(builder.construct(ResumoFuncionario.class
 				, root.get(Funcionario_.codigo)
-				, root.get(Funcionario_.cargo)
-				, root.get(Funcionario_.pessoa).get(Pessoa_.nome)));
+				, root.get(Funcionario_.nome)
+				, root.get(Funcionario_.cargo)));
+
 
 		Predicate[] predicates = criarRestricoes(funcionarioFilter, builder, root);
 		criteria.where(predicates);
@@ -67,9 +67,9 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepositoryQuery {
 			Root<Funcionario> root) {
 		List<Predicate> predicates = new ArrayList<>();
 
-		if (!StringUtils.isEmpty(funcionarioFilter.getCargo())) {
+		if (!StringUtils.isEmpty(funcionarioFilter.getNome())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Funcionario_.cargo)), "%" + funcionarioFilter.getCargo().toLowerCase() + "%"));
+					builder.lower(root.get(Funcionario_.nome)), "%" + funcionarioFilter.getNome().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

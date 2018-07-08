@@ -41,8 +41,8 @@ public class Prontuario {
 	private String relatorio;
 	
 	@ManyToOne
-	@JoinColumn(name = "codigo_pessoa")
-	private Pessoa pessoa;
+	@JoinColumn(name = "codigo_paciente")
+	private Paciente paciente;
 
 	public Long getCodigo() {
 		return codigo;
@@ -76,12 +76,12 @@ public class Prontuario {
 		this.relatorio = relatorio;
 	}
 	
-	public Pessoa getPessoa() {
-		return pessoa;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 	
 	public String getAnexo() {

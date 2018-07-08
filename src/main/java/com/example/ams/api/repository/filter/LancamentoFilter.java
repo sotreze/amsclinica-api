@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class LancamentoFilter {
 	
-	private String pessoa;
+	private String paciente;
 
 	private String descricao;
 
@@ -16,12 +16,12 @@ public class LancamentoFilter {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataConsultaAte;
 	
-	public String getPessoa() {
-		return pessoa;
+	public String getPaciente() {
+		return paciente;
 	}
 
-	public void setPessoa(String pessoa) {
-		this.pessoa = pessoa;
+	public void setPaciente(String paciente) {
+		this.paciente = paciente;
 	}
 
 	public String getDescricao() {

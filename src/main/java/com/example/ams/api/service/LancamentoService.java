@@ -122,7 +122,7 @@ public class LancamentoService {
 
 	public Lancamento atualizar(Long codigo, Lancamento lancamento) {
 		Lancamento lancamentoSalvo = buscarLancamentoExistente(codigo);
-		if (!lancamento.getPessoa().equals(lancamentoSalvo.getPessoa())) {
+		if (!lancamento.getPaciente().equals(lancamentoSalvo.getPaciente())) {
 			validarPessoa(lancamento);
 		}
 
@@ -141,8 +141,8 @@ public class LancamentoService {
 
 	private void validarPessoa(Lancamento lancamento) {
 		Pessoa pessoa = null;
-		if (lancamento.getPessoa().getCodigo() != null) {
-			pessoa = pessoaRepository.findOne(lancamento.getPessoa().getCodigo());
+		if (lancamento.getPaciente().getCodigo() != null) {
+			pessoa = pessoaRepository.findOne(lancamento.getPaciente().getCodigo());
 		}
 
 		if (pessoa == null || pessoa.isInativo()) {

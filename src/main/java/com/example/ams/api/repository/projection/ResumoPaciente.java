@@ -4,16 +4,16 @@ package com.example.ams.api.repository.projection;
 public class ResumoPaciente {
 
 	private Long codigo;
-	private String cpf;
+	private String nome;
 	private String pessoa;
 	private String categoria;
 	private String prontuario;
 
-	public ResumoPaciente(Long codigo, String cpf, String pessoa,  String categoria, String prontuario) {
+	public ResumoPaciente(Long codigo, String nome, String pessoa,  String categoria, String prontuario) {
 		super();
 		this.codigo = codigo;
 		this.pessoa = pessoa;
-		this.cpf = cpf;
+		this.nome = nome;
 		this.categoria = categoria;
 		this.prontuario = prontuario;
 	}
@@ -27,12 +27,12 @@ public class ResumoPaciente {
 		this.codigo = codigo;
 	}
 	
-	public String getCpf() {
-		return cpf;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getPessoa() {

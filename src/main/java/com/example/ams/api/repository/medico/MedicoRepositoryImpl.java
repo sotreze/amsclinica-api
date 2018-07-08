@@ -16,10 +16,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import com.example.ams.api.model.Agenda_;
+//import com.example.ams.api.model.Agenda_;
 import com.example.ams.api.model.Medico;
 import com.example.ams.api.model.Medico_;
-import com.example.ams.api.model.Pessoa_;
 import com.example.ams.api.repository.filter.MedicoFilter;
 import com.example.ams.api.repository.projection.ResumoMedico;
 
@@ -51,9 +50,9 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
 		Root<Medico> root = criteria.from(Medico.class);
 
 		criteria.select(builder.construct(ResumoMedico.class
+				, root.get(Medico_.nome)
 				, root.get(Medico_.codigo), root.get(Medico_.especializacao)
-				, root.get(Medico_.pessoa).get(Pessoa_.nome)
-				, root.get(Medico_.agenda).get(Agenda_.dataHora)
+				//, root.get(Medico_.agenda).get(Agenda_.dataHora)
 				, root.get(Medico_.crm)));
 
 		Predicate[] predicates = criarRestricoes(medicoFilter, builder, root);
@@ -74,9 +73,9 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
 					builder.lower(root.get(Medico_.especializacao)), "%" + medicoFilter.getEspecializacao().toLowerCase() + "%"));
 		}
 		
-		if (!StringUtils.isEmpty(medicoFilter.getPessoa())) {
+		if (!StringUtils.isEmpty(medicoFilter.getNome())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Medico_.pessoa).get(Pessoa_.nome)), "%" + medicoFilter.getPessoa().toLowerCase() + "%"));
+					builder.lower(root.get(Medico_.nome)), "%" + medicoFilter.getNome().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

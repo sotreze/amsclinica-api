@@ -55,8 +55,8 @@ public class Lancamento {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "codigo_pessoa")
-	private Pessoa pessoa;
+	@JoinColumn(name = "codigo_paciente")
+	private Paciente paciente;
 
 	private String anexo;
 
@@ -133,12 +133,12 @@ public class Lancamento {
 		this.exame = exame;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public String getAnexo() {

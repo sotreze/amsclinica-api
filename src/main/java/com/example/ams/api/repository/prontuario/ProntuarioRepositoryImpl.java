@@ -16,8 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-
-import com.example.ams.api.model.Pessoa_;
+import com.example.ams.api.model.Paciente_;
 import com.example.ams.api.model.Prontuario;
 import com.example.ams.api.model.Prontuario_;
 import com.example.ams.api.repository.filter.ProntuarioFilter;
@@ -73,9 +72,9 @@ public class ProntuarioRepositoryImpl implements ProntuarioRepositoryQuery {
 					builder.lower(root.get(Prontuario_.relatorio)), "%" + prontuarioFilter.getRelatorio().toLowerCase() + "%"));
 		}
 		
-		if (!StringUtils.isEmpty(prontuarioFilter.getPessoa())) {
+		if (!StringUtils.isEmpty(prontuarioFilter.getPaciente())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Prontuario_.pessoa).get(Pessoa_.nome)), "%" + prontuarioFilter.getPessoa().toLowerCase() + "%"));
+					builder.lower(root.get(Prontuario_.paciente).get(Paciente_.nome)), "%" + prontuarioFilter.getPaciente().toLowerCase() + "%"));
 		}
 
 

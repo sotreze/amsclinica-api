@@ -23,7 +23,7 @@ import com.example.ams.api.dto.LancamentoEstatisticaPessoa;
 import com.example.ams.api.model.Exame_;
 import com.example.ams.api.model.Lancamento;
 import com.example.ams.api.model.Lancamento_;
-import com.example.ams.api.model.Pessoa_;
+import com.example.ams.api.model.Paciente_;
 import com.example.ams.api.repository.filter.LancamentoFilter;
 import com.example.ams.api.repository.projection.ResumoLancamento;
 
@@ -44,7 +44,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
 		criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaPessoa.class,
 				root.get(Lancamento_.tipo),
-				root.get(Lancamento_.pessoa),
+				root.get(Lancamento_.paciente),
 				criteriaBuilder.sum(root.get(Lancamento_.valor))));
 
 		criteriaQuery.where(
@@ -54,7 +54,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 						fim));
 
 		criteriaQuery.groupBy(root.get(Lancamento_.tipo),
-				root.get(Lancamento_.pessoa));
+				root.get(Lancamento_.paciente));
 
 		TypedQuery<LancamentoEstatisticaPessoa> typedQuery = manager
 				.createQuery(criteriaQuery);
@@ -153,9 +153,8 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 				, root.get(Lancamento_.dataConsulta), root.get(Lancamento_.dataExame)
 				, root.get(Lancamento_.valor), root.get(Lancamento_.tipo)
 				, root.get(Lancamento_.exame).get(Exame_.nome)
-				, root.get(Lancamento_.pessoa)
 				, root.get(Lancamento_.observacao)
-				, root.get(Lancamento_.pessoa).get(Pessoa_.nome)));
+				, root.get(Lancamento_.paciente).get(Paciente_.nome)));
 
 		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);
@@ -185,9 +184,9 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 					builder.lessThanOrEqualTo(root.get(Lancamento_.dataConsulta), lancamentoFilter.getDataConsultaAte()));
 		}
 		
-		if (!StringUtils.isEmpty(lancamentoFilter.getPessoa())) {
+		if (!StringUtils.isEmpty(lancamentoFilter.getPaciente())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Lancamento_.pessoa).get(Pessoa_.nome)), "%" + lancamentoFilter.getPessoa().toLowerCase() + "%"));
+					builder.lower(root.get(Lancamento_.paciente).get(Paciente_.nome)), "%" + lancamentoFilter.getPaciente().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

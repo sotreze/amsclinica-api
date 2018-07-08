@@ -1,19 +1,23 @@
 package com.example.ams.api.repository.projection;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+//import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 public class ResumoAgenda {
 
 	private Long codigo;
 	private Boolean ativo;
-	private LocalDateTime dataHora;
+	private LocalDate data;
+	private LocalTime hora;
 
-	public ResumoAgenda(Long codigo, Boolean ativo, LocalDateTime dataHora) {
+	public ResumoAgenda(Long codigo, Boolean ativo, LocalDate data, LocalTime hora) {
 		super();
 		this.codigo = codigo;
 		this.ativo = ativo;
-		this.dataHora = dataHora;
+		this.data = data;
+		this.hora = hora;
 	}
 
 
@@ -33,12 +37,24 @@ public class ResumoAgenda {
 		this.ativo = ativo;
 	}
 
-	public LocalDateTime getDataHora() {
-		return dataHora;
+
+	public LocalDate getData() {
+		return data;
 	}
 
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+
+	public LocalTime getHora() {
+		return hora;
+	}
+
+
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
 	}
 
 }

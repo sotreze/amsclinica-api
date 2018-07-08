@@ -5,17 +5,19 @@ package com.example.ams.api.repository.projection;
 public class ResumoMedico {
 
 	private Long codigo;
+	private String nome;
 	private String especializacao;
 	private String crm;
-	private String agenda;
+	//private String agenda;
 	private String pessoa;
 
-	public ResumoMedico(Long codigo, String especializacao, String crm, String agenda, String pessoa) {
+	public ResumoMedico(Long codigo, String nome, String especializacao, String crm, String pessoa) {
 		super();
 		this.codigo = codigo;
+		this.nome = nome;
 		this.especializacao = especializacao;
 		this.crm = crm;
-		this.agenda = agenda;
+		//this.agenda = agenda;
 		this.pessoa = pessoa;
 		
 	}
@@ -27,6 +29,14 @@ public class ResumoMedico {
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEspecializacao() {
@@ -45,13 +55,13 @@ public class ResumoMedico {
 		this.crm = crm;
 	}
 	
-	public String getAgenda() {
+	/*public String getAgenda() {
 		return agenda;
 	}
 
 	public void setAgenda(String agenda) {
 		this.agenda = agenda;
-	}
+	}*/
 	
 	public String getPessoa() {
 		return pessoa;

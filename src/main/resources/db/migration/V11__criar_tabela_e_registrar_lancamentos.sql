@@ -7,8 +7,8 @@ CREATE TABLE lancamento (
 	observacao VARCHAR(600),
 	tipo VARCHAR(20) NOT NULL,
 	codigo_exame BIGINT(20),
-	codigo_pessoa BIGINT(20) NOT NULL,
+	codigo_paciente BIGINT(20) NOT NULL,
 	FOREIGN KEY (codigo_exame) REFERENCES exame(codigo),
-	FOREIGN KEY (codigo_pessoa) REFERENCES pessoa(codigo)
+	FOREIGN KEY (codigo_paciente) REFERENCES paciente(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -2,7 +2,7 @@ package com.example.ams.api.repository.filter;
 
 public class PacienteFilter {
 	
-	private String cpf;
+	private String nome;
 
 	private String pessoa;
 	
@@ -10,12 +10,12 @@ public class PacienteFilter {
 
 	//private String prontuario;
 	
-	public String getCpf() {
-		return cpf;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
 	public String getPessoa() {

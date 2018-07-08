@@ -16,7 +16,7 @@ public abstract class Lancamento_ {
 	public static volatile SingularAttribute<Lancamento, LocalDate> dataExame;
 	public static volatile SingularAttribute<Lancamento, String> observacao;
 	public static volatile SingularAttribute<Lancamento, TipoLancamento> tipo;
-	public static volatile SingularAttribute<Lancamento, Pessoa> pessoa;
+	public static volatile SingularAttribute<Lancamento, Paciente> paciente;
 	public static volatile SingularAttribute<Lancamento, Exame> exame;
 	public static volatile SingularAttribute<Lancamento, BigDecimal> valor;
 

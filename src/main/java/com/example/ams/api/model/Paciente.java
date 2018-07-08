@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -19,7 +20,8 @@ public class Paciente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	private String cpf;
+	@NotNull
+	private String nome;
 
 	//@ManyToOne
 	@OneToOne(orphanRemoval = true)
@@ -42,12 +44,12 @@ public class Paciente {
 		this.codigo = codigo;
 	}
 	
-	public String getCpf() {
-		return cpf;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Pessoa getPessoa() {

@@ -25,8 +25,8 @@ public class Funcionario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	// @NotNull
-	// private String nome;
+	@NotNull
+	private String nome;
 
 	@NotNull
 	@Size(min = 3, max = 30)
@@ -43,8 +43,6 @@ public class Funcionario {
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 
-	private String cpf;
-
 	//@NotNull
 	//private Boolean ativo;
 
@@ -56,13 +54,13 @@ public class Funcionario {
 		this.codigo = codigo;
 	}
 
-	/*public String getNome() {
+	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}*/
+	}
 
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -95,14 +93,6 @@ public class Funcionario {
 
 	public void setDataAdmissao(LocalDate dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	/*public Boolean getAtivo() {

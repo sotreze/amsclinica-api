@@ -6,6 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class FuncionarioFilter {
+	
+	private String nome;
 
 	private String cargo;
 
@@ -14,6 +16,14 @@ public class FuncionarioFilter {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataAdmissaoDe;
 
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public String getCargo() {
 		return cargo;
