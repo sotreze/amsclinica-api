@@ -16,6 +16,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
+//import com.example.ams.api.dto.ReceitaGerar;
+import com.example.ams.api.model.Medicacao_;
+import com.example.ams.api.model.Medico_;
+import com.example.ams.api.model.Paciente_;
 import com.example.ams.api.model.Receita;
 import com.example.ams.api.model.Receita_;
 import com.example.ams.api.repository.filter.ReceitaFilter;
@@ -25,6 +29,7 @@ public class ReceitaRepositoryImpl implements ReceitaRepositoryQuery {
 
 	@PersistenceContext
 	private EntityManager manager;
+	
 
 	@Override
 	public Page<Receita> filtrar(ReceitaFilter receitaFilter, Pageable pageable) {
@@ -49,8 +54,11 @@ public class ReceitaRepositoryImpl implements ReceitaRepositoryQuery {
 		Root<Receita> root = criteria.from(Receita.class);
 
 		criteria.select(builder.construct(ResumoReceita.class
-				, root.get(Receita_.codigo), 
-				root.get(Receita_.descricao)
+				, root.get(Receita_.codigo) 
+				, root.get(Receita_.medico).get(Medico_.nome)
+				, root.get(Receita_.paciente).get(Paciente_.nome)
+				, root.get(Receita_.medicacao).get(Medicacao_.nomeReferencia)
+				, root.get(Receita_.descricao)
 				));
 
 		Predicate[] predicates = criarRestricoes(receitaFilter, builder, root);
@@ -69,6 +77,16 @@ public class ReceitaRepositoryImpl implements ReceitaRepositoryQuery {
 		if (!StringUtils.isEmpty(receitaFilter.getDescricao())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(Receita_.descricao)), "%" + receitaFilter.getDescricao().toLowerCase() + "%"));
+		}
+		
+		if (!StringUtils.isEmpty(receitaFilter.getMedico())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Receita_.medico).get(Medico_.nome)), "%" + receitaFilter.getMedico().toLowerCase() + "%"));
+		}
+		
+		if (!StringUtils.isEmpty(receitaFilter.getPaciente())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Receita_.paciente).get(Paciente_.nome)), "%" + receitaFilter.getPaciente().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

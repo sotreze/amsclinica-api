@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receita" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Error" uuid="3120949c-c7eb-4591-b5b8-10acb778b855">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="MEDICO" class="com.example.ams.api.model.Medico"/>
+	<parameter name="MEDICACAO" class="com.example.ams.api.model.Medicacao"/>
+	<parameter name="GERAR_RECEITA" class="com.example.ams.api.dto.GerarReceita"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="medico" class="com.example.ams.api.model.Medico"/>
+	<field name="medicacao" class="com.example.ams.api.model.Medicacao"/>
+	<field name="descricao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="117" y="24" width="320" height="30" uuid="bfb15dd8-56b8-450b-a0cb-45f082da3474"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[AMS Clínica - Especialidades Integradas]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="70" width="550" height="1" uuid="6cd61a04-a81e-457a-9fcb-bf19ddbb84d0"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="11" width="50" height="25" uuid="60c829a6-e6da-4c53-af15-70c38ac08147"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Dr.(a)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="405" y="10" width="140" height="34" uuid="6982bee8-a184-40e4-92af-7541a3613fc5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Data "+DATEFORMAT(TODAY(), "dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="10" width="270" height="23" uuid="fedf26ea-e604-425a-b772-bd5984c9aced"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GERAR_RECEITA}.getMedico().getNome()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="36" width="80" height="24" uuid="61f77164-aaef-4a37-be13-870a8fb201f5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Especialidade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="36" width="260" height="24" uuid="210b9182-cf23-483e-808e-e5c6d1d45f8e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GERAR_RECEITA}.getMedico().getEspecializacao()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="198" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="80" height="20" uuid="a2a1aef3-c575-4ff1-8f5a-6298b3356473"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Receituário:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="79" height="24" uuid="5e14f1f1-81a4-439a-a674-ee30c04c1fb0"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Descrição:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="30" width="300" height="25" uuid="0510574e-16fc-4f0c-a5cb-69be8934c160"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GERAR_RECEITA}.getMedicacao().getNomeReferencia()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="160" width="301" height="30" uuid="53127752-04ea-4e1e-be8c-3c8a2121bf23"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GERAR_RECEITA}.getDescricao()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="70" width="301" height="22" uuid="3686702d-e67a-4dc9-86fd-81dfd531e7a1"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GERAR_RECEITA}.getMedicacao().getNomeGenerico()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="100" width="300" height="20" uuid="89c83b5a-0b1d-4087-adf8-616a14177edd"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GERAR_RECEITA}.getMedicacao().getFabricante()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="30" width="490" height="24" uuid="7ec4a2d3-cca7-43ad-9723-455cc861f726"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Rua Adolpho Setúbal , 235 - Parque Bela Vista - CEP 13214-820 - Jundiaí - SP          ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="550" height="1" uuid="ec46e03a-076b-4aa5-b038-daedce55ef28"/>
+			</line>
+			<staticText>
+				<reportElement x="204" y="52" width="146" height="24" uuid="125fd7c5-04d0-492c-880e-4696bf3b5e23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[amsclinica.herokuapp.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,5 +1,6 @@
 package com.example.ams.api.service;
 
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,15 +8,12 @@ import org.springframework.stereotype.Service;
 import com.example.ams.api.model.Receita;
 import com.example.ams.api.repository.ReceitaRepository;
 
+
 @Service
 public class ReceitaService {
 
 	@Autowired
 	private ReceitaRepository receitaRepository;
-
-	public Receita salvar(Receita receita) {
-		return receitaRepository.save(receita);
-	}
 
 	public Receita atualizar(Long codigo, Receita receita) {
 		Receita receitaSalva = buscarReceitaExistente(codigo);

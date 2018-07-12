@@ -94,7 +94,7 @@ public class LancamentoResource {
 		return this.lancamentoRepository.porDia(LocalDate.now());
 	}
 
-	@GetMapping("/estatisticas/por-material")
+	@GetMapping("/estatisticas/por-exame")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
 	public List<LancamentoEstatisticaExame> porExame() {
 		return this.lancamentoRepository.porExame(LocalDate.now());

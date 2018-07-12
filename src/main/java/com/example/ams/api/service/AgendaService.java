@@ -12,6 +12,7 @@ import com.example.ams.api.repository.AgendaRepository;
 //import com.example.ams.api.repository.MedicoRepository;
 //import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
 
+
 @Service
 public class AgendaService {
 

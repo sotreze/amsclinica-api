@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "receita")
@@ -17,9 +16,16 @@ public class Receita {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigo_medico")
+	private Medico medico;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigo_paciente")
+	private Paciente paciente;
 
 	@NotNull
-	@Size(min = 3, max = 20)
 	private String descricao;
 	
 	@NotNull
@@ -33,6 +39,22 @@ public class Receita {
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+	
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+	
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	public String getDescricao() {
