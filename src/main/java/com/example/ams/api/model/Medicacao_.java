@@ -9,8 +9,6 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Medicacao_ {
 
 	public static volatile SingularAttribute<Medicacao, Long> codigo;
-	public static volatile SingularAttribute<Medicacao, String> nomeReferencia;
-	public static volatile SingularAttribute<Medicacao, String> nomeGenerico;
-	public static volatile SingularAttribute<Medicacao, String> fabricante;
+	public static volatile SingularAttribute<Medicacao, String> descricao;
 
 }

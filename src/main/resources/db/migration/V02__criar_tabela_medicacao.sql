@@ -1,6 +1,4 @@
 CREATE TABLE medicacao (
 	codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	nome_referencia VARCHAR(400) NOT NULL,
-	nome_generico VARCHAR(400),
-	fabricante VARCHAR(400)
+	descricao VARCHAR(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

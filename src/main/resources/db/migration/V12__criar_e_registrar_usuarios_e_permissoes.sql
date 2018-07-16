@@ -60,9 +60,9 @@ INSERT INTO permissao (codigo, descricao) values (24, 'ROLE_CADASTRAR_PRONTUARIO
 INSERT INTO permissao (codigo, descricao) values (25, 'ROLE_REMOVER_PRONTUARIO');
 INSERT INTO permissao (codigo, descricao) values (26, 'ROLE_PESQUISAR_PRONTUARIO');
 
-INSERT INTO permissao (codigo, descricao) values (27, 'ROLE_CADASTRAR_RECEITA');
-INSERT INTO permissao (codigo, descricao) values (28, 'ROLE_REMOVER_RECEITA');
-INSERT INTO permissao (codigo, descricao) values (29, 'ROLE_PESQUISAR_RECEITA');
+INSERT INTO permissao (codigo, descricao) values (27, 'ROLE_CADASTRAR_PRESCRICAO');
+INSERT INTO permissao (codigo, descricao) values (28, 'ROLE_REMOVER_PRESCRICAO');
+INSERT INTO permissao (codigo, descricao) values (29, 'ROLE_PESQUISAR_PRESCRICAO');
 
 INSERT INTO permissao (codigo, descricao) values (30, 'ROLE_CADASTRAR_MEDICACAO');
 INSERT INTO permissao (codigo, descricao) values (31, 'ROLE_REMOVER_MEDICACAO');

@@ -1,6 +1,8 @@
 package com.example.ams.api.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,8 +12,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "receita")
-public class Receita {
+@Table(name = "prescricao")
+public class Prescricao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +27,19 @@ public class Receita {
 	@JoinColumn(name = "codigo_paciente")
 	private Paciente paciente;
 
-	@NotNull
 	private String descricao;
 	
 	@NotNull
+	@Enumerated(EnumType.STRING)
+	private TipoPrescricao tipo;
+	
 	@ManyToOne
 	@JoinColumn(name = "codigo_medicacao")
 	private Medicacao medicacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigo_exame")
+	private Exame exame;
 
 	public Long getCodigo() {
 		return codigo;
@@ -65,12 +73,28 @@ public class Receita {
 		this.descricao = descricao;
 	}
 	
+	public TipoPrescricao getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoPrescricao tipo) {
+		this.tipo = tipo;
+	}
+
 	public Medicacao getMedicacao() {
 		return medicacao;
 	}
 
 	public void setMedicacao(Medicacao medicacao) {
 		this.medicacao = medicacao;
+	}
+	
+	public Exame getExame() {
+		return exame;
+	}
+
+	public void setExame(Exame exame) {
+		this.exame = exame;
 	}
 
 	@Override
@@ -89,7 +113,7 @@ public class Receita {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Receita other = (Receita) obj;
+		Prescricao other = (Prescricao) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
