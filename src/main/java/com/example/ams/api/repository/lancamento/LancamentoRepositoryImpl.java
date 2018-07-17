@@ -20,7 +20,7 @@ import org.springframework.util.StringUtils;
 import com.example.ams.api.dto.LancamentoEstatisticaExame;
 import com.example.ams.api.dto.LancamentoEstatisticaDia;
 import com.example.ams.api.dto.LancamentoEstatisticaPessoa;
-import com.example.ams.api.model.Exame_;
+import com.example.ams.api.model.TipoExame_;
 import com.example.ams.api.model.Lancamento;
 import com.example.ams.api.model.Lancamento_;
 import com.example.ams.api.model.Paciente_;
@@ -106,7 +106,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
 
 		criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatisticaExame.class,
-				root.get(Lancamento_.exame),
+				root.get(Lancamento_.tipoExame),
 				criteriaBuilder.sum(root.get(Lancamento_.valor))));
 
 		LocalDate primeiroDia = mesReferencia.withDayOfMonth(1);
@@ -118,7 +118,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 				criteriaBuilder.lessThanOrEqualTo(root.get(Lancamento_.dataExame),
 						ultimoDia));
 
-		criteriaQuery.groupBy(root.get(Lancamento_.exame));
+		criteriaQuery.groupBy(root.get(Lancamento_.tipoExame));
 
 		TypedQuery<LancamentoEstatisticaExame> typedQuery = manager
 				.createQuery(criteriaQuery);
@@ -152,7 +152,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 				, root.get(Lancamento_.codigo), root.get(Lancamento_.descricao)
 				, root.get(Lancamento_.dataConsulta), root.get(Lancamento_.dataExame)
 				, root.get(Lancamento_.valor), root.get(Lancamento_.tipo)
-				, root.get(Lancamento_.exame).get(Exame_.nome)
+				, root.get(Lancamento_.tipoExame).get(TipoExame_.nome)
 				, root.get(Lancamento_.observacao)
 				, root.get(Lancamento_.paciente).get(Paciente_.nome)));
 

@@ -2,25 +2,25 @@ package com.example.ams.api.dto;
 
 import java.math.BigDecimal;
 
-import com.example.ams.api.model.Exame;
+import com.example.ams.api.model.TipoExame;
 
 public class LancamentoEstatisticaExame {
 
-private Exame exame;
+private TipoExame tipoExame;
 
 	private BigDecimal total;
 
-	public LancamentoEstatisticaExame(Exame exame, BigDecimal total) {
-		this.exame = exame;
+	public LancamentoEstatisticaExame(TipoExame tipoExame, BigDecimal total) {
+		this.tipoExame = tipoExame;
 		this.total = total;
 	}
 
-	public Exame getExame() {
-		return exame;
+	public TipoExame getExame() {
+		return tipoExame;
 	}
 
-	public void setExame(Exame exame) {
-		this.exame = exame;
+	public void setExame(TipoExame tipoExame) {
+		this.tipoExame = tipoExame;
 	}
 
 	public BigDecimal getTotal() {

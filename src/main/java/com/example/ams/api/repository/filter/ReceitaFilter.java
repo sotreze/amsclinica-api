@@ -1,7 +1,7 @@
 package com.example.ams.api.repository.filter;
 
 
-public class PrescricaoFilter {
+public class ReceitaFilter {
 
 	private String descricao;
 	
@@ -10,8 +10,6 @@ public class PrescricaoFilter {
 	private String paciente;
 	
 	private String medicacao;
-	
-	private String exame;
 
 	public String getDescricao() {
 		return descricao;
@@ -44,14 +42,6 @@ public class PrescricaoFilter {
 
 	public void setMedicacao(String medicacao) {
 		this.medicacao = medicacao;
-	}
-	
-	public String getExame() {
-		return exame;
-	}
-
-	public void setExame(String exame) {
-		this.exame = exame;
 	}
 
 }

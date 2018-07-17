@@ -1,4 +1,4 @@
-INSERT INTO `exame` (`codigo`, `nome`) VALUES
+INSERT INTO `tipoexame` (`codigo`, `nome`) VALUES
 	(1, 'ÍNDICE CÁLCIO / CREATININA'),
 	(2, 'ÍNDICE PROTEÍNA / CREATININA'),
 	(3, 'ÁCIDO LÁTICO'),

@@ -51,7 +51,7 @@ public class Lancamento {
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_exame")
-	private Exame exame;
+	private TipoExame tipoExame;
 
 	@NotNull
 	@ManyToOne
@@ -125,12 +125,12 @@ public class Lancamento {
 		this.tipo = tipo;
 	}
 
-	public Exame getExame() {
-		return exame;
+	public TipoExame getExame() {
+		return tipoExame;
 	}
 
-	public void setExame(Exame exame) {
-		this.exame = exame;
+	public void setExame(TipoExame tipoExame) {
+		this.tipoExame = tipoExame;
 	}
 
 	public Paciente getPaciente() {

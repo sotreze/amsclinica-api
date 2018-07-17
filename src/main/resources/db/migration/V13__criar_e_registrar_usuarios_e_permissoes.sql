@@ -60,9 +60,9 @@ INSERT INTO permissao (codigo, descricao) values (24, 'ROLE_CADASTRAR_PRONTUARIO
 INSERT INTO permissao (codigo, descricao) values (25, 'ROLE_REMOVER_PRONTUARIO');
 INSERT INTO permissao (codigo, descricao) values (26, 'ROLE_PESQUISAR_PRONTUARIO');
 
-INSERT INTO permissao (codigo, descricao) values (27, 'ROLE_CADASTRAR_PRESCRICAO');
-INSERT INTO permissao (codigo, descricao) values (28, 'ROLE_REMOVER_PRESCRICAO');
-INSERT INTO permissao (codigo, descricao) values (29, 'ROLE_PESQUISAR_PRESCRICAO');
+INSERT INTO permissao (codigo, descricao) values (27, 'ROLE_CADASTRAR_RECEITA');
+INSERT INTO permissao (codigo, descricao) values (28, 'ROLE_REMOVER_RECEITA');
+INSERT INTO permissao (codigo, descricao) values (29, 'ROLE_PESQUISAR_RECEITA');
 
 INSERT INTO permissao (codigo, descricao) values (30, 'ROLE_CADASTRAR_MEDICACAO');
 INSERT INTO permissao (codigo, descricao) values (31, 'ROLE_REMOVER_MEDICACAO');
@@ -75,6 +75,8 @@ INSERT INTO permissao (codigo, descricao) values (35, 'ROLE_PESQUISAR_AGENDA');
 INSERT INTO permissao (codigo, descricao) values (36, 'ROLE_CADASTRAR_PERIODO');
 INSERT INTO permissao (codigo, descricao) values (37, 'ROLE_REMOVER_PERIODO');
 INSERT INTO permissao (codigo, descricao) values (38, 'ROLE_PESQUISAR_PERIODO');
+
+INSERT INTO permissao (codigo, descricao) values (39, 'ROLE_REMOVER_EXAME');
 
 -- admin
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 1);
@@ -115,6 +117,7 @@ INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 35);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 36);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 37);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 38);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 39);
 
 
 -- maria
