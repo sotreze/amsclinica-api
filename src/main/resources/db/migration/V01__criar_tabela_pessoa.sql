@@ -1,6 +1,6 @@
 CREATE TABLE pessoa (
 	codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	cpf VARCHAR(30),
+	rg VARCHAR(20),
 	logradouro VARCHAR(30),
 	numero VARCHAR(30),
 	complemento VARCHAR(30),

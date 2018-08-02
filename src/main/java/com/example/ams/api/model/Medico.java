@@ -1,22 +1,14 @@
 package com.example.ams.api.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-//import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-//import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -29,6 +21,8 @@ public class Medico {
 	
 	@NotNull
 	private String nome;
+	
+	private String cpf;
 	
 	@NotNull
 	private String especializacao;
@@ -46,11 +40,11 @@ public class Medico {
 	@JoinColumn(name = "codigo_agenda")
 	private Agenda agenda;*/
 	
-	@JsonIgnoreProperties("medico")
+	/*@JsonIgnoreProperties("medico")
 	@Valid
 	@OneToMany(mappedBy = "medico", cascade = CascadeType.ALL,
 			orphanRemoval = true)
-	private List<Agenda> agendas;
+	private List<Agenda> agendas;*/
 
 	public Long getCodigo() {
 		return codigo;
@@ -70,6 +64,15 @@ public class Medico {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public void setEspecializacao(String especializacao) {

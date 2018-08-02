@@ -4,16 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-//import java.util.ArrayList;
-//import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-//import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.domain.Page;
@@ -45,8 +41,8 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 		Root<Agenda> root = criteriaQuery.from(Agenda.class);
 
 		criteriaQuery.select(criteriaBuilder.construct(AgendaEstatisticaDia.class,
-				//root.get(Agenda_.medico),
-				//root.get(Agenda_.paciente),
+				root.get(Agenda_.medico),
+				root.get(Agenda_.paciente),
 				root.get(Agenda_.data),
 				root.get(Agenda_.hora)));
 
@@ -60,8 +56,8 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 						ultimoDia));
 
 		criteriaQuery.groupBy(
-				//root.get(Agenda_.medico),
-				//root.get(Agenda_.paciente),
+				root.get(Agenda_.medico),
+				root.get(Agenda_.paciente),
 				root.get(Agenda_.data));
 
 		TypedQuery<AgendaEstatisticaDia> typedQuery = manager
@@ -97,8 +93,8 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 				, root.get(Agenda_.ativo)
 				, root.get(Agenda_.data)
 				, root.get(Agenda_.hora)
-				, root.get(Agenda_.medico).get(Medico_.nome)
-				, root.get(Agenda_.paciente).get(Paciente_.nome)));
+				, root.get(Agenda_.paciente).get(Paciente_.nome)
+				, root.get(Agenda_.medico).get(Medico_.nome)));
 
 
 		Predicate[] predicates = criarRestricoes(agendaFilter, builder, root);
@@ -114,7 +110,7 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 			Root<Agenda> root) {
 		List<Predicate> predicates = new ArrayList<>();
 
-		if (agendaFilter.getDataDe() != null) {
+		/*if (agendaFilter.getDataDe() != null) {
 			predicates.add(
 					builder.greaterThanOrEqualTo(root.get(Agenda_.data), agendaFilter.getDataDe()));
 		}
@@ -122,6 +118,16 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 		if (agendaFilter.getDataAte() != null) {
 			predicates.add(
 					builder.lessThanOrEqualTo(root.get(Agenda_.data), agendaFilter.getDataAte()));
+		}*/
+		
+		if (agendaFilter.getCodigo() != null) {
+			predicates.add(
+				builder.equal(root.get(Agenda_.codigo), agendaFilter.getCodigo()));
+		}
+		
+		if (!StringUtils.isEmpty(agendaFilter.getPaciente())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Agenda_.paciente).get(Paciente_.nome)), "%" + agendaFilter.getPaciente().toLowerCase() + "%"));
 		}
 		
 		if (!StringUtils.isEmpty(agendaFilter.getMedico())) {
@@ -129,10 +135,26 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 					builder.lower(root.get(Agenda_.medico).get(Medico_.nome)), "%" + agendaFilter.getMedico().toLowerCase() + "%"));
 		}
 		
-		if (!StringUtils.isEmpty(agendaFilter.getPaciente())) {
-			predicates.add(builder.like(
-					builder.lower(root.get(Agenda_.paciente).get(Paciente_.nome)), "%" + agendaFilter.getPaciente().toLowerCase() + "%"));
+		if (agendaFilter.getData() != null) {
+			predicates.add(
+				builder.equal(root.get(Agenda_.data), agendaFilter.getData()));
 		}
+		
+		if (agendaFilter.getHora() != null) {
+			predicates.add(
+				builder.equal(root.get(Agenda_.hora), agendaFilter.getHora()));
+		}
+		
+		/*if (!StringUtils.isEmpty(agendaFilter.getHora())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Agenda_.hora)), "%" + agendaFilter.getHora().toLowerCase() + "%"));
+		}*/
+		
+		/*if (agendaFilter.getHorario() != null) {
+		predicates.add(
+			builder.equal(root.get(Agenda_.horario).get(Horario_.hora), agendaFilter.getHorario()));
+		}*/
+		
 
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

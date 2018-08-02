@@ -1,5 +1,7 @@
 package com.example.ams.api.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "receita")
@@ -30,6 +33,8 @@ public class Receita {
 	
 	private String descricao;
 
+	private LocalDate data;
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -68,6 +73,14 @@ public class Receita {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	@Override

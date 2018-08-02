@@ -51,7 +51,8 @@ public class PacienteRepositoryImpl implements PacienteRepositoryQuery {
 
 		criteria.select(builder.construct(ResumoPaciente.class
 				, root.get(Paciente_.codigo) 
-				, root.get(Paciente_.nome)));
+				, root.get(Paciente_.nome)
+				, root.get(Paciente_.cpf)));
 
 		Predicate[] predicates = criarRestricoes(pacienteFilter, builder, root);
 		criteria.where(predicates);
@@ -69,6 +70,11 @@ public class PacienteRepositoryImpl implements PacienteRepositoryQuery {
 		if (!StringUtils.isEmpty(pacienteFilter.getNome())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(Paciente_.nome)), "%" + pacienteFilter.getNome().toLowerCase() + "%"));
+		}
+		
+		if (!StringUtils.isEmpty(pacienteFilter.getCpf())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Paciente_.cpf)), "%" + pacienteFilter.getCpf().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

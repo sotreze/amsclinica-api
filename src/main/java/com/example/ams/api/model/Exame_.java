@@ -1,5 +1,7 @@
 package com.example.ams.api.model;
 
+import java.time.LocalDate;
+
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -13,4 +15,5 @@ public abstract class Exame_ {
 	public static volatile SingularAttribute<Exame, Paciente> paciente;
 	public static volatile SingularAttribute<Exame, TipoExame> tipoExame;
 	public static volatile SingularAttribute<Exame, String> descricao;
+	public static volatile SingularAttribute<Exame, LocalDate> data;
 }

@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+//import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,13 +22,16 @@ public class Paciente {
 	
 	@NotNull
 	private String nome;
+	
+	private String cpf;
 
 	//@ManyToOne
 	@OneToOne(orphanRemoval = true)
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 
-	@ManyToOne
+	//@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
 	
@@ -50,6 +53,14 @@ public class Paciente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public Pessoa getPessoa() {

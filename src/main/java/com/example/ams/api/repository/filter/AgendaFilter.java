@@ -1,44 +1,37 @@
 package com.example.ams.api.repository.filter;
 
 import java.time.LocalDate;
-//import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class AgendaFilter {
 	
+	private Long codigo;
 	
 	private Boolean ativo;
 	
+	private String paciente;
+	
+	private String horario;
+	
 	private String medico;
 	
-	private String paciente;
-
-	//@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dataDe;
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dataAte;
-
-	/*public LocalDateTime getDataHoraDe() {
-		return dataHoraDe;
-	}
-
-	public void setDataHoraDe(LocalDateTime dataHoraDe) {
-		this.dataHoraDe = dataHoraDe;
-	}
-
-	public LocalDateTime getDataHoraAte() {
-		return dataHoraAte;
-	}
-
-	public void setDataHoraAte(LocalDateTime dataHoraAte) {
-		this.dataHoraAte = dataHoraAte;
-	}*/
+	private LocalDate data;
+	
+	//@DateTimeFormat(pattern = "HH:mm")
+	private String hora;
 	
 	
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
+
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -47,7 +40,23 @@ public class AgendaFilter {
 		this.ativo = ativo;
 	}
 	
+
+	public String getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(String paciente) {
+		this.paciente = paciente;
+	}
 	
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
 	public String getMedico() {
 		return medico;
 	}
@@ -56,29 +65,20 @@ public class AgendaFilter {
 		this.medico = medico;
 	}
 	
-	
-	public String getPaciente() {
-		return paciente;
+	public LocalDate getData() {
+		return data;
 	}
 
-	public void setPaciente(String paciente) {
-		this.paciente = paciente;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
-	public LocalDate getDataDe() {
-		return dataDe;
+	public String getHora() {
+		return hora;
 	}
 
-	public void setDataDe(LocalDate dataDe) {
-		this.dataDe = dataDe;
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
-
-	public LocalDate getDataAte() {
-		return dataAte;
-	}
-
-	public void setDataAte(LocalDate dataAte) {
-		this.dataAte = dataAte;
-	}
-
+		
 }

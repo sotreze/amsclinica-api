@@ -8,6 +8,6 @@ import com.example.ams.api.model.Pessoa;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
-	public Page<Pessoa> findByCpfContaining(String cpf, Pageable pageable);
+	public Page<Pessoa> findByRgContaining(String rg, Pageable pageable);
 	
 }

@@ -69,7 +69,7 @@ public class LancamentoResource {
 
 
 	@PostMapping("/anexo")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('write')")
 	public Anexo uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
 		String nome = s3.salvarTemporariamente(anexo);
 		return new Anexo(nome, s3.configurarUrl(nome));
@@ -77,7 +77,7 @@ public class LancamentoResource {
 	}
 
 	@GetMapping("/relatorios/por-pessoa")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<byte[]> relatorioPorPessoa(
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate inicio,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fim) throws Exception {
@@ -89,38 +89,38 @@ public class LancamentoResource {
 	}
 
 	@GetMapping("/estatisticas/por-dia")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public List<LancamentoEstatisticaDia> porDia() {
 		return this.lancamentoRepository.porDia(LocalDate.now());
 	}
 
 	@GetMapping("/estatisticas/por-exame")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public List<LancamentoEstatisticaExame> porExame() {
 		return this.lancamentoRepository.porExame(LocalDate.now());
 	}
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
 		return lancamentoRepository.resumir(lancamentoFilter, pageable);
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo) {
 		Lancamento lancamento = lancamentoRepository.findOne(codigo);
 		return lancamento != null ? ResponseEntity.ok(lancamento) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Lancamento> criar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
 		Lancamento lancamentoSalvo = lancamentoService.salvar(lancamento);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalvo.getCodigo()));
@@ -145,13 +145,13 @@ public class LancamentoResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_LANCAMENTO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		lancamentoRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
 	public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lancamento lancamento) {
 		try {
 			Lancamento lancamentoSalvo = lancamentoService.atualizar(codigo, lancamento);

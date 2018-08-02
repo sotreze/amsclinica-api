@@ -43,14 +43,14 @@ public class UsuarioResource {
 
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_USUARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Usuario> buscarPeloCodigo(@PathVariable Long codigo) {
 		Usuario usuario = usuarioRepository.findOne(codigo);
 		return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public ResponseEntity<Usuario> criar(@Valid @RequestBody Usuario usuario, HttpServletResponse response) {
 		Usuario usuarioSalvo = usuarioService.salvar(usuario);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, usuarioSalvo.getCodigo()));
@@ -59,13 +59,13 @@ public class UsuarioResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_USUARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		usuarioRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR')")
 	public ResponseEntity<Usuario> atualizar(@PathVariable Long codigo, @Valid @RequestBody Usuario usuario) {
 		try {
 			Usuario usuarioSalvo = usuarioService.atualizar(codigo, usuario);
@@ -77,13 +77,13 @@ public class UsuarioResource {
 
 	@PutMapping("/{codigo}/ativo")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_USUARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
 		usuarioService.atualizarPropriedadeAtivo(codigo, ativo);
 	}
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_USUARIO')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
 	public Page<Usuario> pesquisar(@RequestParam(required = false, defaultValue = "%") String primeiroNome, Pageable pageable) {
 		return usuarioRepository.findByPrimeiroNomeContaining(primeiroNome, pageable);
 	}

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import com.example.ams.api.model.Lancamento;
+import com.example.ams.api.model.Solicitacao;
 import com.example.ams.api.model.Usuario;
 
 @Component
@@ -46,10 +46,10 @@ public class Mailer {
 	}*/
 
 	// início refatorar
-	public void avisarSobreLancamentosConsultas(
-			List<Lancamento> proximas, List<Usuario> destinatarios) {
+	public void avisarSobreConsultasCanceladas(
+			List<Solicitacao> proximas, List<Usuario> destinatarios) {
 		Map<String, Object> variaveis = new HashMap<>();
-		variaveis.put("lancamentos", proximas);
+		variaveis.put("solicitacoes", proximas);
 
 		List<String> emails = destinatarios.stream()
 				.map(u -> u.getEmail())
@@ -57,7 +57,7 @@ public class Mailer {
 
 		this.enviarEmail("sistemaamsclinica@gmail.com",
 				emails,
-				"Lançamentos de consultas",
+				"Lançamentos de consultas canceladas",
 				"mail/aviso-lancamentos-consultas",
 				variaveis);
 	}

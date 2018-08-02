@@ -1,19 +1,23 @@
 package com.example.ams.api.repository.projection;
 
+import java.time.LocalDate;
+
 public class ResumoExame {
 
 	private Long codigo;
 	private String descricao;
+	private LocalDate data;
 	private String medico;
 	private String paciente;
 	private String tipoExame;
 
-	public ResumoExame(Long codigo, String descricao, String medico, String paciente, String tipoExame) {
+	public ResumoExame(Long codigo, String descricao, LocalDate data, String medico, String paciente, String tipoExame) {
 		super();
 		this.codigo = codigo;
 		this.medico = medico;
 		this.paciente = paciente;
 		this.descricao = descricao;
+		this.data = data;
 		this.tipoExame = tipoExame;
 	}
 
@@ -56,6 +60,14 @@ public class ResumoExame {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 	
 }

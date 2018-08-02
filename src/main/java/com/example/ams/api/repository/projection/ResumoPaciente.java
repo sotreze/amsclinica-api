@@ -5,15 +5,17 @@ public class ResumoPaciente {
 
 	private Long codigo;
 	private String nome;
+	private String cpf;
 	private String pessoa;
 	private String categoria;
 	private String prontuario;
 
-	public ResumoPaciente(Long codigo, String nome, String pessoa,  String categoria, String prontuario) {
+	public ResumoPaciente(Long codigo, String nome, String cpf, String pessoa,  String categoria, String prontuario) {
 		super();
 		this.codigo = codigo;
 		this.pessoa = pessoa;
 		this.nome = nome;
+		this.cpf = cpf;
 		this.categoria = categoria;
 		this.prontuario = prontuario;
 	}
@@ -33,6 +35,14 @@ public class ResumoPaciente {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getPessoa() {

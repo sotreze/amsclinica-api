@@ -51,26 +51,26 @@ public class PacienteResource {
 	private MessageSource messageSource;
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PACIENTE') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public Page<Paciente> pesquisar(PacienteFilter pacienteFilter, Pageable pageable) {
 		return pacienteRepository.filtrar(pacienteFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PACIENTE') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoPaciente> resumir(PacienteFilter pacienteFilter, Pageable pageable) {
 		return pacienteRepository.resumir(pacienteFilter, pageable);
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PACIENTE') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Paciente> buscarPeloCodigo(@PathVariable Long codigo) {
 		Paciente paciente = pacienteRepository.findOne(codigo);
 		 return paciente != null ? ResponseEntity.ok(paciente) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PACIENTE') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Paciente> criar(@Valid @RequestBody Paciente paciente, HttpServletResponse response) {
 		Paciente pacienteSalvo = pacienteRepository.save(paciente);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, pacienteSalvo.getCodigo()));
@@ -87,13 +87,13 @@ public class PacienteResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_PACIENTE') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		pacienteRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PACIENTE')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
 	public ResponseEntity<Paciente> atualizar(@PathVariable Long codigo, @Valid @RequestBody Paciente paciente) {
 		try {
 			Paciente pacienteSalvo = pacienteService.atualizar(codigo, paciente);

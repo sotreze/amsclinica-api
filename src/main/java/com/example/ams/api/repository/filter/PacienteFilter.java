@@ -3,6 +3,8 @@ package com.example.ams.api.repository.filter;
 public class PacienteFilter {
 	
 	private String nome;
+	
+	private String cpf;
 
 	private String pessoa;
 	
@@ -18,6 +20,14 @@ public class PacienteFilter {
 		this.nome = nome;
 	}
 	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public String getPessoa() {
 		return pessoa;
 	}

@@ -51,26 +51,26 @@ public class FuncionarioResource {
 	private MessageSource messageSource;
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_FUNCIONARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<Funcionario> pesquisar(FuncionarioFilter funcionarioFilter, Pageable pageable) {
 		return funcionarioRepository.filtrar(funcionarioFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_FUNCIONARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoFuncionario> resumir(FuncionarioFilter funcionarioFilter, Pageable pageable) {
 		return funcionarioRepository.resumir(funcionarioFilter, pageable);
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_FUNCIONARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Funcionario> buscarPeloCodigo(@PathVariable Long codigo) {
 		 Funcionario funcionario = funcionarioRepository.findOne(codigo);
 		 return funcionario != null ? ResponseEntity.ok(funcionario) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public ResponseEntity<Funcionario> criar(@Valid @RequestBody Funcionario funcionario, HttpServletResponse response) {
 		Funcionario funcionarioSalvo = funcionarioRepository.save(funcionario);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, funcionarioSalvo.getCodigo()));
@@ -87,13 +87,13 @@ public class FuncionarioResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		funcionarioRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_FUNCIONARIO')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR')")
 	public ResponseEntity<Funcionario> atualizar(@PathVariable Long codigo, @Valid @RequestBody Funcionario funcionario) {
 		try {
 			Funcionario funcionarioSalvo = funcionarioService.atualizar(codigo, funcionario);

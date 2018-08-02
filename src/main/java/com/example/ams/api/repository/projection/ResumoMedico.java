@@ -6,18 +6,18 @@ public class ResumoMedico {
 
 	private Long codigo;
 	private String nome;
+	private String cpf;
 	private String especializacao;
 	private String crm;
-	//private String agenda;
 	private String pessoa;
 
-	public ResumoMedico(Long codigo, String nome, String especializacao, String crm, String pessoa) {
+	public ResumoMedico(Long codigo, String nome, String cpf, String especializacao, String crm, String pessoa) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
+		this.cpf = cpf;
 		this.especializacao = especializacao;
 		this.crm = crm;
-		//this.agenda = agenda;
 		this.pessoa = pessoa;
 		
 	}
@@ -37,6 +37,14 @@ public class ResumoMedico {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}	
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getEspecializacao() {
@@ -54,14 +62,6 @@ public class ResumoMedico {
 	public void setCrm(String crm) {
 		this.crm = crm;
 	}
-	
-	/*public String getAgenda() {
-		return agenda;
-	}
-
-	public void setAgenda(String agenda) {
-		this.agenda = agenda;
-	}*/
 	
 	public String getPessoa() {
 		return pessoa;

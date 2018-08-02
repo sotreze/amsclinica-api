@@ -11,7 +11,7 @@ public abstract class Pessoa_ {
 	public static volatile SingularAttribute<Pessoa, Long> codigo;
 	public static volatile SingularAttribute<Pessoa, Boolean> ativo;
 	public static volatile SingularAttribute<Pessoa, Endereco> endereco;
-	public static volatile SingularAttribute<Pessoa, String> cpf;
+	public static volatile SingularAttribute<Pessoa, String> rg;
 	public static volatile SingularAttribute<Pessoa, String> telefone;
 	//public static volatile SingularAttribute<Pessoa, TipoPessoa> tipo;
 

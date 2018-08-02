@@ -27,6 +27,8 @@ public class Funcionario {
 
 	@NotNull
 	private String nome;
+	
+	private String cpf;
 
 	@NotNull
 	@Size(min = 3, max = 30)
@@ -60,6 +62,14 @@ public class Funcionario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public Pessoa getPessoa() {

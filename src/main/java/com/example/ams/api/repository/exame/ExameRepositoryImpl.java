@@ -59,6 +59,7 @@ public class ExameRepositoryImpl implements ExameRepositoryQuery {
 				, root.get(Exame_.paciente).get(Paciente_.nome)
 				, root.get(Exame_.tipoExame).get(TipoExame_.nome)
 				, root.get(Exame_.descricao)
+				, root.get(Exame_.data)
 				));
 
 		Predicate[] predicates = criarRestricoes(exameFilter, builder, root);

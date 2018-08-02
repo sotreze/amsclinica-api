@@ -42,26 +42,26 @@ public class ReceitaResource {
 	
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_RECEITA') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<Receita> pesquisar(ReceitaFilter receitaFilter, Pageable pageable) {
 		return receitaRepository.filtrar(receitaFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_RECEITA') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoReceita> resumir(ReceitaFilter receitaFilter, Pageable pageable) {
 		return receitaRepository.resumir(receitaFilter, pageable);
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_RECEITA') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Receita> buscarPeloCodigo(@PathVariable Long codigo) {
 		Receita receita = receitaRepository.findOne(codigo);
 		 return receita != null ? ResponseEntity.ok(receita) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_RECEITA') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Receita> criar(@Valid @RequestBody Receita receita, HttpServletResponse response) {
 		Receita receitaSalva = receitaRepository.save(receita);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, receitaSalva.getCodigo()));
@@ -70,13 +70,13 @@ public class ReceitaResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_RECEITA') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		receitaRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_RECEITA')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
 	public ResponseEntity<Receita> atualizar(@PathVariable Long codigo, @Valid @RequestBody Receita receita) {
 		try {
 			Receita receitaSalva = receitaService.atualizar(codigo, receita);

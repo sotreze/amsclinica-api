@@ -9,22 +9,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
+//import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.example.ams.api.dto.LancamentoEstatisticaPessoa;
-import com.example.ams.api.mail.Mailer;
+//import com.example.ams.api.mail.Mailer;
 import com.example.ams.api.model.Lancamento;
 import com.example.ams.api.model.Pessoa;
-import com.example.ams.api.model.Usuario;
+//import com.example.ams.api.model.Usuario;
 import com.example.ams.api.repository.LancamentoRepository;
 import com.example.ams.api.repository.PessoaRepository;
-import com.example.ams.api.repository.UsuarioRepository;
+//import com.example.ams.api.repository.UsuarioRepository;
 import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
 import com.example.ams.api.storage.S3;
 
@@ -37,28 +37,28 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 @Service
 public class LancamentoService {
 
-	private static final String DESTINATARIOS = "ROLE_PESQUISAR_LANCAMENTO";
+	//private static final String DESTINATARIOS = "ROLE_PESQUISAR_LANCAMENTO";
 
-	private static final Logger logger = LoggerFactory.getLogger(LancamentoService.class);
+	//private static final Logger logger = LoggerFactory.getLogger(LancamentoService.class);
 
-	@Autowired
+	//@Autowired
 	private PessoaRepository pessoaRepository;
 
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
 
-	@Autowired
-	private UsuarioRepository usuarioRepository;
+	//@Autowired
+	//private UsuarioRepository usuarioRepository;
 
-	@Autowired
-	private Mailer mailer;
+	//@Autowired
+	//private Mailer mailer;
 
 	@Autowired
 	private S3 s3;
 
 	//inicio refatorar
-	@Scheduled(cron = "0 0 6 * * *")
-	public void avisarSobreLancamentosConsultas() {
+	/*@Scheduled(cron = "0 0 6 * * *")
+	public void avisarSobreConsultasCanceladas() {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("Preparando envio de "
@@ -86,11 +86,11 @@ public class LancamentoService {
 			return;
 		}
 
-		mailer.avisarSobreLancamentosConsultas(consultas, destinatarios);
+		mailer.avisarSobreConsultasCanceladas(consultas, destinatarios);
 
 		logger.info("Envio de e-mail de aviso concluído.");
-	}
-	//fim refatorar
+	}*/
+	
 
 
 	public byte[] relatorioPorPessoa(LocalDate inicio, LocalDate fim) throws Exception {

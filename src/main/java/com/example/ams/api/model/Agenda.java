@@ -1,24 +1,20 @@
 package com.example.ams.api.model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+//import java.time.LocalTime;
 
-//import java.time.LocalDateTime;
-//import javax.persistence.Column;
-//import javax.persistence.Convert;
-//import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-//import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 import javax.persistence.Transient;
-//import javax.validation.constraints.NotNull;
 
-//import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -30,20 +26,13 @@ public class Agenda {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	/*@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-	@Column(name="data_hora")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime dataHora;*/
 	
 	private LocalDate data;
 	
-	private LocalTime hora;
+	private String hora;
 	
-    //@Column
-    //@Convert(converter = BooleanSimNaoConverter.class)
-	private Boolean ativo;
-	
+	private Boolean ativo = true;
+		
 	@ManyToOne
 	@JoinColumn(name = "codigo_medico")
 	private Medico medico;
@@ -52,7 +41,12 @@ public class Agenda {
 	@ManyToOne
 	@JoinColumn(name = "codigo_paciente")
 	private Paciente paciente;
-
+	
+	@OneToOne
+	@JoinColumn(name = "hora_horario")
+	private Horario horario;
+	
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -64,7 +58,6 @@ public class Agenda {
 	/*public LocalDateTime getDataHora() {
 		return dataHora;
 	}
-
 	public void setDataHora(LocalDateTime dataHora) {
 		this.dataHora = dataHora;
 	}*/
@@ -76,15 +69,16 @@ public class Agenda {
 	public void setData(LocalDate data) {
 	this.data = data;
 	}
-	
-	public LocalTime getHora() {
-	return hora;
+
+	public String getHora() {
+		return hora;
 	}
 
-	public void setHora(LocalTime hora) {
-	this.hora = hora;
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
-	
+
+
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -107,6 +101,14 @@ public class Agenda {
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+	
+	public Horario getHorario() {
+		return horario;
+	}
+
+	public void setHorario(Horario horario) {
+		this.horario = horario;
 	}
 
 	@JsonIgnore
@@ -140,5 +142,5 @@ public class Agenda {
 			return false;
 		return true;
 	}
-
+	
 }

@@ -51,6 +51,7 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepositoryQuery {
 		criteria.select(builder.construct(ResumoFuncionario.class
 				, root.get(Funcionario_.codigo)
 				, root.get(Funcionario_.nome)
+				, root.get(Funcionario_.cpf)
 				, root.get(Funcionario_.cargo)));
 
 
@@ -70,6 +71,11 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepositoryQuery {
 		if (!StringUtils.isEmpty(funcionarioFilter.getNome())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(Funcionario_.nome)), "%" + funcionarioFilter.getNome().toLowerCase() + "%"));
+		}
+		
+		if (!StringUtils.isEmpty(funcionarioFilter.getCpf())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Funcionario_.cpf)), "%" + funcionarioFilter.getCpf().toLowerCase() + "%"));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

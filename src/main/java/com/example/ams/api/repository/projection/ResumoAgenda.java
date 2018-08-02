@@ -1,8 +1,6 @@
 package com.example.ams.api.repository.projection;
 
 import java.time.LocalDate;
-//import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 
 public class ResumoAgenda {
@@ -10,14 +8,18 @@ public class ResumoAgenda {
 	private Long codigo;
 	private Boolean ativo;
 	private LocalDate data;
-	private LocalTime hora;
+	private String hora;
+	private String paciente;
+	private String medico;
 
-	public ResumoAgenda(Long codigo, Boolean ativo, LocalDate data, LocalTime hora) {
+	public ResumoAgenda(Long codigo, Boolean ativo, LocalDate data, String hora, String medico, String paciente) {
 		super();
 		this.codigo = codigo;
 		this.ativo = ativo;
 		this.data = data;
 		this.hora = hora;
+		this.paciente = paciente;
+		this.medico = medico;
 	}
 
 
@@ -46,15 +48,31 @@ public class ResumoAgenda {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
+	
 
-
-	public LocalTime getHora() {
+	public String getHora() {
 		return hora;
 	}
 
 
-	public void setHora(LocalTime hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
+	}
+
+	public String getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(String paciente) {
+		this.paciente = paciente;
+	}
+
+	public String getMedico() {
+		return medico;
+	}
+
+	public void setMedico(String medico) {
+		this.medico = medico;
 	}
 
 }

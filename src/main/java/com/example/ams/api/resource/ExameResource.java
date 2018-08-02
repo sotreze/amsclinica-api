@@ -42,26 +42,26 @@ public class ExameResource {
 	
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_EXAME') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<Exame> pesquisar(ExameFilter exameFilter, Pageable pageable) {
 		return exameRepository.filtrar(exameFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_EXAME') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoExame> resumir(ExameFilter exameFilter, Pageable pageable) {
 		return exameRepository.resumir(exameFilter, pageable);
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_EXAME') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Exame> buscarPeloCodigo(@PathVariable Long codigo) {
 		Exame exame = exameRepository.findOne(codigo);
 		 return exame != null ? ResponseEntity.ok(exame) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_EXAME') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Exame> criar(@Valid @RequestBody Exame exame, HttpServletResponse response) {
 		Exame exameSalvo = exameRepository.save(exame);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, exameSalvo.getCodigo()));
@@ -70,13 +70,13 @@ public class ExameResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_EXAME') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		exameRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_EXAME')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
 	public ResponseEntity<Exame> atualizar(@PathVariable Long codigo, @Valid @RequestBody Exame exame) {
 		try {
 			Exame exameSalvo = exameService.atualizar(codigo, exame);

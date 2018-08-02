@@ -51,26 +51,26 @@ public class MedicoResource {
 	private MessageSource messageSource;
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_MEDICO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public Page<Medico> pesquisar(MedicoFilter medicoFilter, Pageable pageable) {
 		return medicoRepository.filtrar(medicoFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_MEDICO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoMedico> resumir(MedicoFilter medicoFilter, Pageable pageable) {
 		return medicoRepository.resumir(medicoFilter, pageable);
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_MEDICO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Medico> buscarPeloCodigo(@PathVariable Long codigo) {
 		Medico medico = medicoRepository.findOne(codigo);
 		 return medico != null ? ResponseEntity.ok(medico) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_MEDICO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public ResponseEntity<Medico> criar(@Valid @RequestBody Medico medico, HttpServletResponse response) {
 		//Medico medicoSalvo = medicoRepository.save(medico);
 		Medico medicoSalvo = medicoService.salvar(medico);
@@ -88,13 +88,13 @@ public class MedicoResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_MEDICO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		medicoRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_MEDICO')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR')")
 	public ResponseEntity<Medico> atualizar(@PathVariable Long codigo, @Valid @RequestBody Medico medico) {
 		try {
 			Medico medicoSalvo = medicoService.atualizar(codigo, medico);

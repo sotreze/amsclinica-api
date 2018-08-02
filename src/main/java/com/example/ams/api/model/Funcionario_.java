@@ -12,6 +12,7 @@ public abstract class Funcionario_ {
 
 	public static volatile SingularAttribute<Funcionario, Long> codigo;
 	public static volatile SingularAttribute<Funcionario, String> nome;
+	public static volatile SingularAttribute<Funcionario, String> cpf;
 	public static volatile SingularAttribute<Funcionario, String> cargo;
 	public static volatile SingularAttribute<Funcionario, String> setor;
 	public static volatile SingularAttribute<Funcionario, LocalDate> dataAdmissao;

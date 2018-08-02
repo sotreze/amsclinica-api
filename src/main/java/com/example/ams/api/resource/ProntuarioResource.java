@@ -63,33 +63,33 @@ public class ProntuarioResource {
 	private S3 s3;
 	
 	@PostMapping("/anexo")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PRONTUARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public Anexo uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
 		String nome = s3.salvarTemporariamente(anexo);
 		return new Anexo(nome, s3.configurarUrl(nome));
 	}
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRONTUARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<Prontuario> pesquisar(ProntuarioFilter prontuarioFilter, Pageable pageable) {
 		return prontuarioRepository.filtrar(prontuarioFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRONTUARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoProntuario> resumir(ProntuarioFilter prontuarioFilter, Pageable pageable) {
 		return prontuarioRepository.resumir(prontuarioFilter, pageable);
 	}
 
 	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRONTUARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public ResponseEntity<Prontuario> buscarPeloCodigo(@PathVariable Long codigo) {
 		Prontuario prontuario = prontuarioRepository.findOne(codigo);
 		 return prontuario != null ? ResponseEntity.ok(prontuario) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PRONTUARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Prontuario> criar(@Valid @RequestBody Prontuario prontuario, HttpServletResponse response) {
 		Prontuario prontuarioSalvo = prontuarioService.salvar(prontuario);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, prontuarioSalvo.getCodigo()));
@@ -107,13 +107,13 @@ public class ProntuarioResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_PRONTUARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		prontuarioRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PRONTUARIO')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
 	public ResponseEntity<Prontuario> atualizar(@PathVariable Long codigo, @Valid @RequestBody Prontuario prontuario) {
 		try {
 			Prontuario prontuarioSalvo = prontuarioService.atualizar(codigo, prontuario);

@@ -25,7 +25,8 @@ public class Pessoa {
 	/*@NotNull
 	private String nome;*/
 	
-	private String cpf;
+	//private String cpf;
+	private String rg;
 
 	@Embedded
 	private Endereco endereco;
@@ -47,12 +48,12 @@ public class Pessoa {
 		this.codigo = codigo;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getRg() {
+		return rg;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
 
 	public Endereco getEndereco() {

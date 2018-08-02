@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.ams.api.model.Agenda;
 //import com.example.ams.api.model.Medico;
+import com.example.ams.api.model.Pessoa;
 import com.example.ams.api.repository.AgendaRepository;
 //import com.example.ams.api.repository.MedicoRepository;
-//import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
+import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
 
 
 @Service
@@ -23,7 +24,7 @@ public class AgendaService {
 	private AgendaRepository agendaRepository;
 
 	public Agenda salvar(Agenda agenda) {
-		//validarMedico(agenda);    
+		validarMedico(agenda);    
 	    return agendaRepository.save(agenda);
 	}
 
@@ -43,16 +44,16 @@ public class AgendaService {
 		agendaRepository.save(agendaSalva);
 	}
 
-	/*private void validarMedico(Agenda agenda) {
-		Medico medico = null;
-		if (agenda.getMedico().getCodigo() != null) {
-			medico = medicoRepository.findOne(agenda.getMedico().getCodigo());
-		}
+	private void validarMedico(Agenda agenda) {
+		Pessoa pessoa = null;
+		/*if (agenda.getMedico().getCodigo() != null) {
+			pessoa = medicoRepository.findOne(agenda.getMedico().getCodigo());
+		}*/
 
 		if (pessoa == null || pessoa.isInativo()) {
 			throw new PessoaInexistenteOuInativaException();
 		}
-	}*/
+	}
 
 	private Agenda buscarAgendaPeloCodigo(Long codigo) {
 		Agenda agendaSalva = agendaRepository.findOne(codigo);
