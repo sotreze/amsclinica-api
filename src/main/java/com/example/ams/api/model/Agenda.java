@@ -1,8 +1,9 @@
 package com.example.ams.api.model;
 
 import java.time.LocalDate;
-//import java.time.LocalTime;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +27,7 @@ public class Agenda {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	private String email;
 	
 	private LocalDate data;
 	
@@ -42,6 +44,9 @@ public class Agenda {
 	@JoinColumn(name = "codigo_paciente")
 	private Paciente paciente;
 	
+	@Column(name = "data_agendamento")
+	private LocalDateTime dataAgendamento;
+	
 	@OneToOne
 	@JoinColumn(name = "hora_horario")
 	private Horario horario;
@@ -55,25 +60,26 @@ public class Agenda {
 		this.codigo = codigo;
 	}
 
-	/*public LocalDateTime getDataHora() {
-		return dataHora;
+	public String getEmail() {
+		return email;
 	}
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
-	}*/
-	
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public LocalDate getData() {
-	return data;
+		return data;
 	}
 
 	public void setData(LocalDate data) {
-	this.data = data;
+		this.data = data;
 	}
 
 	public String getHora() {
 		return hora;
 	}
-
+	
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
@@ -103,6 +109,14 @@ public class Agenda {
 		this.paciente = paciente;
 	}
 	
+	public LocalDateTime getDataAgendamento() {
+		return dataAgendamento;
+	}
+
+	public void setDataAgendamento(LocalDateTime dataAgendamento) {
+		this.dataAgendamento = dataAgendamento;
+	}
+
 	public Horario getHorario() {
 		return horario;
 	}

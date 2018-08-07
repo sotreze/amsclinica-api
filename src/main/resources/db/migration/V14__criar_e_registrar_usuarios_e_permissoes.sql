@@ -22,8 +22,8 @@ CREATE TABLE usuario_permissao (
 	FOREIGN KEY (codigo_permissao) REFERENCES permissao(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (1, 'Maria', 'Silva', 'maria.silva@yahoo.com.br', 1, '$2a$10$dUNnU7lxaml5uIv/iO4XYOub.deGyt/P0T3Yw7l9O.M9zeeZ0KJ0u');
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (2, 'Fernanda', 'Alves', 'fernanda.alves@ams.com.br', 1, '$2a$10$dUNnU7lxaml5uIv/iO4XYOub.deGyt/P0T3Yw7l9O.M9zeeZ0KJ0u');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (1, 'Maria', 'Silva', 'maria.silva@yahoo.com.br', 1, '$2a$10$BzRwflIG6FFmaVpEF.dTieQKT0zemP4A3COmsPwm97gHOVZUvQ/Py');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (2, 'Fernanda', 'Alves', 'fernanda.alves@ams.com.br', 1, '$2a$10$4ITNriTCLg2exezyCj8lZeXUbkn7EurPYr5vTZlhrjmr.ZDyRgh2u');
 INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (3, 'Adonildo', 'Filho',  'adonildo.filho@ams.com.br', 1, '$2a$10$dUNnU7lxaml5uIv/iO4XYOub.deGyt/P0T3Yw7l9O.M9zeeZ0KJ0u');
 INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (4, 'Márcio', 'Sousa',  'sotreze@yahoo.com.br', 1, '$2a$10$dUNnU7lxaml5uIv/iO4XYOub.deGyt/P0T3Yw7l9O.M9zeeZ0KJ0u');
 

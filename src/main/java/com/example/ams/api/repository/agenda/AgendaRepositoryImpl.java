@@ -41,6 +41,7 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 		Root<Agenda> root = criteriaQuery.from(Agenda.class);
 
 		criteriaQuery.select(criteriaBuilder.construct(AgendaEstatisticaDia.class,
+				root.get(Agenda_.email),
 				root.get(Agenda_.medico),
 				root.get(Agenda_.paciente),
 				root.get(Agenda_.data),
@@ -91,6 +92,7 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 		criteria.select(builder.construct(ResumoAgenda.class
 				, root.get(Agenda_.codigo)
 				, root.get(Agenda_.ativo)
+				, root.get(Agenda_.email)
 				, root.get(Agenda_.data)
 				, root.get(Agenda_.hora)
 				, root.get(Agenda_.paciente).get(Paciente_.nome)
@@ -123,6 +125,11 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 		if (agendaFilter.getCodigo() != null) {
 			predicates.add(
 				builder.equal(root.get(Agenda_.codigo), agendaFilter.getCodigo()));
+		}
+		
+		if (!StringUtils.isEmpty(agendaFilter.getEmail())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Agenda_.email)), "%" + agendaFilter.getEmail().toLowerCase() + "%"));
 		}
 		
 		if (!StringUtils.isEmpty(agendaFilter.getPaciente())) {

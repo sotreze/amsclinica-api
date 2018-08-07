@@ -72,13 +72,13 @@ public class SolicitacaoResource {
 
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<Solicitacao> pesquisar(SolicitacaoFilter solicitacaoFilter, Pageable pageable) {
 		return solicitacaoRepository.filtrar(solicitacaoFilter, pageable);
 	}
 
 	@GetMapping(params = "resumo")
-	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
 	public Page<ResumoSolicitacao> resumir(SolicitacaoFilter solicitacoFilter, Pageable pageable) {
 		return solicitacaoRepository.resumir(solicitacoFilter, pageable);
 	}

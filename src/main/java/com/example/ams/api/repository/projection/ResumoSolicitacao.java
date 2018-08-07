@@ -7,15 +7,15 @@ public class ResumoSolicitacao {
 	private Long codigo;
 	private String descricao;
 	private LocalDate data;
-	private String agenda;
+	private String email;
 	private String paciente;
 	
-	public ResumoSolicitacao(Long codigo, String descricao, LocalDate data, String agenda, String paciente) {
+	public ResumoSolicitacao(Long codigo, String descricao, LocalDate data, String paciente, String email) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.data = data;
-		this.agenda = agenda;
+		this.email = email;
 		this.paciente = paciente;
 	}
 
@@ -42,13 +42,13 @@ public class ResumoSolicitacao {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-
-	public String getAgenda() {
-		return agenda;
+	
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAgenda(String agenda) {
-		this.agenda = agenda;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPaciente() {

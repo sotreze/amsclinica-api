@@ -19,7 +19,6 @@ import org.springframework.util.StringUtils;
 
 import com.example.ams.api.model.Solicitacao;
 import com.example.ams.api.model.Solicitacao_;
-import com.example.ams.api.model.Agenda_;
 import com.example.ams.api.model.Paciente_;
 import com.example.ams.api.repository.filter.SolicitacaoFilter;
 import com.example.ams.api.repository.projection.ResumoSolicitacao;
@@ -58,7 +57,7 @@ public class SolicitacaoRepositoryImpl implements SolicitacaoRepositoryQuery {
 				, root.get(Solicitacao_.descricao)
 				, root.get(Solicitacao_.data)
 				, root.get(Solicitacao_.paciente).get(Paciente_.nome)
-				, root.get(Solicitacao_.agenda).get(Agenda_.codigo)));
+				, root.get(Solicitacao_.email)));
 
 
 		Predicate[] predicates = criarRestricoes(solicitacaoFilter, builder, root);
@@ -79,6 +78,11 @@ public class SolicitacaoRepositoryImpl implements SolicitacaoRepositoryQuery {
 		if (solicitacaoFilter.getCodigo() != null) {
 			predicates.add(
 				builder.equal(root.get(Solicitacao_.codigo), solicitacaoFilter.getCodigo()));
+		}
+		
+		if (!StringUtils.isEmpty(solicitacaoFilter.getEmail())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(Solicitacao_.email)), "%" + solicitacaoFilter.getEmail().toLowerCase() + "%"));
 		}
 		
 		if (!StringUtils.isEmpty(solicitacaoFilter.getPaciente())) {

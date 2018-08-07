@@ -4,13 +4,18 @@ package com.example.ams.api.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,24 +27,36 @@ public class Solicitacao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	//@JsonIgnoreProperties({"paciente", "senha", "email"})
-	@OneToOne
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	/*@JsonIgnoreProperties({"categoria", "medico"})
+	@ManyToOne
 	@JoinColumn(name = "codigo_agenda")
-	private Agenda agenda;
+	private Agenda agenda;*/
 	
-	@OneToOne
+	@NotNull
+	private String email;
+	
+	@ManyToOne
 	@JoinColumn(name = "codigo_paciente")
 	private Paciente paciente;
 	
+	@NotNull
 	private String descricao;
 	
 	private LocalDate data;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private TipoSolicitacao tipo;
 	
 	private String anexo;
 
 	@Transient
 	private String urlAnexo;
+	
+	@JsonIgnore
+	public boolean isCancelamento() {
+		return TipoSolicitacao.CANCELAMENTO.equals(this.tipo);
+	}
 	
 	public Long getCodigo() {
 		return codigo;
@@ -48,13 +65,21 @@ public class Solicitacao {
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-
-	public Agenda getAgenda() {
+	
+	/*public Agenda getAgenda() {
 		return agenda;
 	}
 
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
+	}*/
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Paciente getPaciente() {
@@ -81,6 +106,14 @@ public class Solicitacao {
 		this.data = data;
 	}
 	
+	public TipoSolicitacao getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoSolicitacao tipo) {
+		this.tipo = tipo;
+	}
+
 	public String getAnexo() {
 		return anexo;
 	}

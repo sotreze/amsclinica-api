@@ -11,6 +11,8 @@ public class AgendaFilter {
 	
 	private Boolean ativo;
 	
+	private String email;
+	
 	private String paciente;
 	
 	private String horario;
@@ -40,6 +42,13 @@ public class AgendaFilter {
 		this.ativo = ativo;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getPaciente() {
 		return paciente;

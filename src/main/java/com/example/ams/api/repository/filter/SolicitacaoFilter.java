@@ -8,7 +8,7 @@ public class SolicitacaoFilter {
 	
 	private Long codigo;
 	
-	private String agenda;
+	private String email;
 	
 	private String paciente;
 	
@@ -24,13 +24,13 @@ public class SolicitacaoFilter {
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-
-	public String getAgenda() {
-		return agenda;
+	
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAgenda(String agenda) {
-		this.agenda = agenda;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPaciente() {
