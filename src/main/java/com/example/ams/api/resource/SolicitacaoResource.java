@@ -61,6 +61,7 @@ public class SolicitacaoResource {
 	@Autowired
 	private S3 s3;
 
+	
 
 	@PostMapping("/anexo")
 	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('write')")

@@ -6,15 +6,15 @@ public class ResumoSolicitacao {
 
 	private Long codigo;
 	private String descricao;
-	private LocalDate data;
+	private LocalDate dataSolicitacao;
 	private String email;
 	private String paciente;
 	
-	public ResumoSolicitacao(Long codigo, String descricao, LocalDate data, String paciente, String email) {
+	public ResumoSolicitacao(Long codigo, String descricao, LocalDate dataSolicitacao, String paciente, String email) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
-		this.data = data;
+		this.dataSolicitacao = dataSolicitacao;
 		this.email = email;
 		this.paciente = paciente;
 	}
@@ -35,12 +35,12 @@ public class ResumoSolicitacao {
 		this.descricao = descricao;
 	}
 
-	public LocalDate getData() {
-		return data;
+	public LocalDate getDataSolicitacao() {
+		return dataSolicitacao;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDataSolicitacao(LocalDate dataSolicitacao) {
+		this.dataSolicitacao = dataSolicitacao;
 	}
 	
 	public String getEmail() {

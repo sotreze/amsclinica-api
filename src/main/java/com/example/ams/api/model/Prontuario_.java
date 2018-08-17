@@ -9,8 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Prontuario_ {
 
 	public static volatile SingularAttribute<Prontuario, Long> codigo;
-	public static volatile SingularAttribute<Prontuario, String> receita;
 	public static volatile SingularAttribute<Prontuario, String> relatorio;
 	public static volatile SingularAttribute<Prontuario, Paciente> paciente;
-
+	public static volatile SingularAttribute<Prontuario, Medico> medico;
 }

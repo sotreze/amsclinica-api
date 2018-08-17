@@ -1,7 +1,9 @@
 package com.example.ams.api.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -18,6 +21,11 @@ public class Exame {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
+	//private Long quantidade = (long) 1;
+	@NotNull
+	private BigDecimal quantidade = new BigDecimal("1");
+	//private BigDecimal quantidade;
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_medico")
@@ -33,14 +41,32 @@ public class Exame {
 	
 	private String descricao;
 	
-	private LocalDate data;
+	@Column(name = "data_agendamento")
+	private LocalDate dataAgendamento;
+	
 	
 	public Long getCodigo() {
 		return codigo;
 	}
+	
+	/*public Long getQuantidade() {
+		return quantidade;
+	}
 
+	public void setQuantidade(Long quantidade) {
+		this.quantidade = quantidade;
+	}*/
+	
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
+	}
+
+	public BigDecimal getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(BigDecimal quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public Medico getMedico() {
@@ -74,13 +100,13 @@ public class Exame {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public LocalDate getData() {
-		return data;
+	
+	public LocalDate getDataAgendamento() {
+		return dataAgendamento;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDataAgendamento(LocalDate dataAgendamento) {
+		this.dataAgendamento = dataAgendamento;
 	}
 
 	@Override

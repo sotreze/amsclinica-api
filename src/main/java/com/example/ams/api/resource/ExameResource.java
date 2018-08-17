@@ -1,6 +1,9 @@
 package com.example.ams.api.resource;
 
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.ams.api.dto.ExameEstatisticaDia;
+import com.example.ams.api.dto.ExameEstatisticaTipoExame;
 import com.example.ams.api.event.RecursoCriadoEvent;
 import com.example.ams.api.model.Exame;
 import com.example.ams.api.repository.ExameRepository;
@@ -40,6 +46,17 @@ public class ExameResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
+	@GetMapping("/estatisticas/por-dia")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
+	public List<ExameEstatisticaDia> porDia() {
+		return this.exameRepository.porDia(LocalDate.now());
+	}
+	
+	@GetMapping("/estatisticas/por-exame")
+	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")
+	public List<ExameEstatisticaTipoExame> porExame() {
+		return this.exameRepository.porExame(LocalDate.now());
+	}	
 
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('read')")

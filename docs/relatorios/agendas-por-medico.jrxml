@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="agendas-por-medico" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d6b4113-1481-47b6-bda9-0f1f827a9121">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="DT_INICIO" class="java.util.Date"/>
+	<parameter name="DT_FIM" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="medico" class="com.example.ams.api.model.Medico"/>
+	<field name="paciente" class="com.example.ams.api.model.Paciente"/>
+	<title>
+		<band height="60" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="15" width="553" height="30" uuid="e3c07fe1-ea45-432e-9a72-e8a4db172ba6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agendas por médico de "+DATEFORMAT($P{DT_INICIO}, "dd/MM/yyyy" ) +" até "+DATEFORMAT($P{DT_FIM}, "dd/MM/yyyy" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="26" backcolor="#D9D7D7" uuid="19af404c-c952-4694-91b6-af2054a9a042"/>
+			</rectangle>
+			<line>
+				<reportElement x="277" y="0" width="1" height="26" uuid="f6b07e83-5d20-4919-8e22-7c5097361c75"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="0" width="255" height="25" uuid="68cad7a8-e52e-4f0e-8a92-1ebb1db45f37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Médico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="1" width="255" height="25" uuid="d9a30219-4f80-4663-bcd0-78dedbffa62d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="25" uuid="f652669e-d86f-49dc-b06e-0763076f432c"/>
+			</line>
+			<line>
+				<reportElement x="277" y="0" width="1" height="25" uuid="1e33c09e-95d3-4483-9cad-7fe15e711207"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="25" uuid="10c41e65-6bbf-4d21-b291-75294c9e16a8"/>
+			</line>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="fa8bc052-5318-468c-83ef-cab9ab70068a"/>
+			</line>
+			<textField>
+				<reportElement x="5" y="1" width="255" height="22" uuid="c16e59bc-2c95-4114-b94b-a4594864e712"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{medico}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="285" y="1" width="250" height="22" uuid="6fc24e0b-30f3-45e5-a09e-bee12647e1c0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{paciente}.getNome()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="165" height="25" uuid="a9dfbe88-2198-4675-b63f-f67c958e7aa0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Data "+DATEFORMAT( TODAY(), "dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="0" width="100" height="25" uuid="b12b64ba-ac32-4980-b7ab-7cb6b42ae271"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

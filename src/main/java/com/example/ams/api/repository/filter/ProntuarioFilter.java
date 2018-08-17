@@ -6,10 +6,9 @@ public class ProntuarioFilter {
 
 	private String paciente;
 	
-	private String receita;
+	private String medico;
 
 	private String relatorio;
-	
 
 	public String getPaciente() {
 		return paciente;
@@ -19,14 +18,14 @@ public class ProntuarioFilter {
 		this.paciente = paciente;
 	}
 	
-	public String getReceita() {
-		return receita;
+	public String getMedico() {
+		return medico;
 	}
 
-	public void setReceita(String receita) {
-		this.receita = receita;
+	public void setMedico(String medico) {
+		this.medico = medico;
 	}
-
+	
 	public String getRelatorio() {
 		return relatorio;
 	}

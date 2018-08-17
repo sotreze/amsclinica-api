@@ -1,7 +1,10 @@
 package com.example.ams.api.repository.filter;
 
+import java.time.LocalDate;
 
- public class ExameFilter {
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class ExameFilter {
 
 	private String descricao;
 	
@@ -10,6 +13,12 @@ package com.example.ams.api.repository.filter;
 	private String paciente;
 	
 	private String tipoExame;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataExameDe;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataExameAte;
 
 	public String getDescricao() {
 		return descricao;
@@ -44,4 +53,20 @@ package com.example.ams.api.repository.filter;
 		this.tipoExame = tipoExame;
 	}
 
+	public LocalDate getDataExameDe() {
+		return dataExameDe;
+	}
+
+	public void setDataExameDe(LocalDate dataExameDe) {
+		this.dataExameDe = dataExameDe;
+	}
+
+	public LocalDate getDataExameAte() {
+		return dataExameAte;
+	}
+
+	public void setDataExameAte(LocalDate dataExameAte) {
+		this.dataExameAte = dataExameAte;
+	}
+	
 }

@@ -28,7 +28,7 @@ public class SolicitacaoRepositoryImpl implements SolicitacaoRepositoryQuery {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+			
 	
 	@Override
 	public Page<Solicitacao> filtrar(SolicitacaoFilter solicitacaoFilter, Pageable pageable) {
@@ -55,7 +55,7 @@ public class SolicitacaoRepositoryImpl implements SolicitacaoRepositoryQuery {
 		criteria.select(builder.construct(ResumoSolicitacao.class
 				, root.get(Solicitacao_.codigo)
 				, root.get(Solicitacao_.descricao)
-				, root.get(Solicitacao_.data)
+				, root.get(Solicitacao_.dataSolicitacao)
 				, root.get(Solicitacao_.paciente).get(Paciente_.nome)
 				, root.get(Solicitacao_.email)));
 
@@ -91,9 +91,14 @@ public class SolicitacaoRepositoryImpl implements SolicitacaoRepositoryQuery {
 		}
 		
 		
-		if (solicitacaoFilter.getData() != null) {
+		if (solicitacaoFilter.getDataSolicitacaoDe() != null) {
 			predicates.add(
-				builder.equal(root.get(Solicitacao_.data), solicitacaoFilter.getData()));
+					builder.greaterThanOrEqualTo(root.get(Solicitacao_.dataSolicitacao), solicitacaoFilter.getDataSolicitacaoDe()));
+		}
+		
+		if (solicitacaoFilter.getDataSolicitacaoAte() != null) {
+			predicates.add(
+					builder.lessThanOrEqualTo(root.get(Solicitacao_.dataSolicitacao), solicitacaoFilter.getDataSolicitacaoAte()));
 		}	
 	
 		return predicates.toArray(new Predicate[predicates.size()]);

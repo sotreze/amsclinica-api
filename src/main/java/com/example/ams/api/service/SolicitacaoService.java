@@ -53,7 +53,7 @@ public class SolicitacaoService {
 		}
 
 		List<Solicitacao> consultas = solicitacaoRepository
-				.findByDataGreaterThanEqual(LocalDate.now());
+				.findByDataSolicitacaoGreaterThanEqual(LocalDate.now());
 
 		if (consultas.isEmpty()) {
 			logger.info("Sem solicitacões cadastradas para o aviso.");

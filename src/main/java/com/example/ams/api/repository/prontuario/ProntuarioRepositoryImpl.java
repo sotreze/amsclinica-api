@@ -51,7 +51,7 @@ public class ProntuarioRepositoryImpl implements ProntuarioRepositoryQuery {
 
 		criteria.select(builder.construct(ResumoProntuario.class
 				, root.get(Prontuario_.codigo)
-				, root.get(Prontuario_.receita)
+				, root.get(Prontuario_.paciente)
 				, root.get(Prontuario_.relatorio)));
 
 		Predicate[] predicates = criarRestricoes(prontuarioFilter, builder, root);
@@ -72,10 +72,16 @@ public class ProntuarioRepositoryImpl implements ProntuarioRepositoryQuery {
 					builder.lower(root.get(Prontuario_.relatorio)), "%" + prontuarioFilter.getRelatorio().toLowerCase() + "%"));
 		}
 		
+		/*if (prontuarioFilter.getAgenda() != null) {
+		predicates.add(
+			builder.equal(root.get(Prontuario_.agenda).get(Agenda_.codigo), prontuarioFilter.getAgenda()));
+		}*/
+		
 		if (!StringUtils.isEmpty(prontuarioFilter.getPaciente())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(Prontuario_.paciente).get(Paciente_.nome)), "%" + prontuarioFilter.getPaciente().toLowerCase() + "%"));
 		}
+		
 
 
 		return predicates.toArray(new Predicate[predicates.size()]);

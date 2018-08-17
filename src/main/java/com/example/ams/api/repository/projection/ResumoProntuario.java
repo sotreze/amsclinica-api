@@ -5,16 +5,14 @@ public class ResumoProntuario {
 
 	private Long codigo;
 	private String paciente;
-	private String exame;
-	private String receita;
+	private String medico;
 	private String relatorio;
 
-	public ResumoProntuario(Long codigo, String paciente, String exame,  String receita,  String relatorio) {
+	public ResumoProntuario(Long codigo, String paciente, String medico,  String relatorio) {
 		super();
 		this.codigo = codigo;
 		this.paciente = paciente;
-		this.exame = exame;
-		this.receita = receita;
+		this.medico = medico;
 		this.relatorio = relatorio;
 	}
 
@@ -34,21 +32,13 @@ public class ResumoProntuario {
 	public void setPaciente(String paciente) {
 		this.paciente = paciente;
 	}
-
-	public String getExame() {
-		return exame;
+	
+	public String getMedico() {
+		return medico;
 	}
 
-	public void setExame(String exame) {
-		this.exame = exame;
-	}
-
-	public String getReceita() {
-		return receita;
-	}
-
-	public void setReceita(String receita) {
-		this.receita = receita;
+	public void setMedico(String medico) {
+		this.medico = medico;
 	}
 
 	public String getRelatorio() {

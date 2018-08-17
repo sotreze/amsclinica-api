@@ -7,15 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.example.ams.api.repository.listener.ProntuarioAnexoListener;
 
-// import org.hibernate.validator.constraints.Email;
-// import org.hibernate.validator.constraints.NotEmpty;
+
 
 @EntityListeners(ProntuarioAnexoListener.class)
 @Entity
@@ -25,17 +22,13 @@ public class Prontuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
-	//@ManyToOne
-	//@JoinColumn(name = "codigo_exame")
-	//private String exame;
+
 	
 	private String anexo;
 
 	@Transient
 	private String urlAnexo;
 	
-	private String receita;
 	
 	//@NotEmpty
 	private String relatorio;
@@ -43,6 +36,10 @@ public class Prontuario {
 	@ManyToOne
 	@JoinColumn(name = "codigo_paciente")
 	private Paciente paciente;
+	
+	@ManyToOne
+	@JoinColumn(name = "codigo_medico")
+	private Medico medico;
 
 	public Long getCodigo() {
 		return codigo;
@@ -50,22 +47,6 @@ public class Prontuario {
 
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
-	}
-
-	/*public String getExame() {
-		return exame;
-	}
-
-	public void setExame(String exame) {
-		this.exame = exame;
-	}*/
-
-	public String getReceita() {
-		return receita;
-	}
-
-	public void setReceita(String receita) {
-		this.receita = receita;
 	}
 
 	public String getRelatorio() {
@@ -84,20 +65,25 @@ public class Prontuario {
 		this.paciente = paciente;
 	}
 	
+	public Medico getMedico() {
+		return medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+
 	public String getAnexo() {
 		return anexo;
 	}
-
 
 	public void setAnexo(String anexo) {
 		this.anexo = anexo;
 	}
 
-
 	public String getUrlAnexo() {
 		return urlAnexo;
 	}
-
 
 	public void setUrlAnexo(String urlAnexo) {
 		this.urlAnexo = urlAnexo;

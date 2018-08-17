@@ -15,7 +15,15 @@ public class SolicitacaoFilter {
 	private String descricao;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate data;
+	private LocalDate dataSolicitacao;
+	
+	private String tipoSolicitacao;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataSolicitacaoDe;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataSolicitacaoAte;
 
 	public Long getCodigo() {
 		return codigo;
@@ -49,12 +57,36 @@ public class SolicitacaoFilter {
 		this.descricao = descricao;
 	}
 
-	public LocalDate getData() {
-		return data;
+	public LocalDate getDataSolicitacao() {
+		return dataSolicitacao;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
-	}		
+	public void setDataSolicitacao(LocalDate dataSolicitacao) {
+		this.dataSolicitacao = dataSolicitacao;
+	}
 
+	public String getTipoSolicitacao() {
+		return tipoSolicitacao;
+	}
+
+	public void setTipoSolicitacao(String tipoSolicitacao) {
+		this.tipoSolicitacao = tipoSolicitacao;
+	}
+
+	public LocalDate getDataSolicitacaoDe() {
+		return dataSolicitacaoDe;
+	}
+
+	public void setDataSolicitacaoDe(LocalDate dataSolicitacaoDe) {
+		this.dataSolicitacaoDe = dataSolicitacaoDe;
+	}
+
+	public LocalDate getDataSolicitacaoAte() {
+		return dataSolicitacaoAte;
+	}
+
+	public void setDataSolicitacaoAte(LocalDate dataSolicitacaoAte) {
+		this.dataSolicitacaoAte = dataSolicitacaoAte;
+	}
+	
 }

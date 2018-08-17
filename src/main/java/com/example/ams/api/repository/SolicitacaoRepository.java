@@ -10,6 +10,6 @@ import com.example.ams.api.repository.solicitacao.SolicitacaoRepositoryQuery;
 
 public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long>, SolicitacaoRepositoryQuery {
 	
-	List<Solicitacao> findByDataGreaterThanEqual(LocalDate data);
+	List<Solicitacao> findByDataSolicitacaoGreaterThanEqual(LocalDate dataSolicitacao);
 
 }

@@ -3,6 +3,7 @@ package com.example.ams.api.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -42,7 +43,8 @@ public class Solicitacao {
 	@NotNull
 	private String descricao;
 	
-	private LocalDate data;
+	@Column(name = "data_solicitacao")
+	private LocalDate dataSolicitacao;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -98,14 +100,22 @@ public class Solicitacao {
 		this.descricao = descricao;
 	}
 
-	public LocalDate getData() {
+	/*public LocalDate getData() {
 		return data;
 	}
 
 	public void setData(LocalDate data) {
 		this.data = data;
+	}*/
+
+	public LocalDate getDataSolicitacao() {
+		return dataSolicitacao;
 	}
-	
+
+	public void setDataSolicitacao(LocalDate dataSolicitacao) {
+		this.dataSolicitacao = dataSolicitacao;
+	}
+		
 	public TipoSolicitacao getTipo() {
 		return tipo;
 	}

@@ -17,7 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import com.example.ams.api.dto.AgendaEstatisticaDia;
+import com.example.ams.api.dto.AgendaEstatisticaMedico;
 import com.example.ams.api.model.Agenda;
 import com.example.ams.api.model.Agenda_;
 import com.example.ams.api.model.Medico_;
@@ -31,41 +31,35 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 	private EntityManager manager;
 	
 	
+	
 	@Override
-	public List<AgendaEstatisticaDia> porDia(LocalDate mesReferencia) {
+	public List<AgendaEstatisticaMedico> porMedico(LocalDate inicio, LocalDate fim) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 
-		CriteriaQuery<AgendaEstatisticaDia> criteriaQuery = criteriaBuilder.
-				createQuery(AgendaEstatisticaDia.class);
+		CriteriaQuery<AgendaEstatisticaMedico> criteriaQuery = criteriaBuilder.
+				createQuery(AgendaEstatisticaMedico.class);
 
 		Root<Agenda> root = criteriaQuery.from(Agenda.class);
 
-		criteriaQuery.select(criteriaBuilder.construct(AgendaEstatisticaDia.class,
-				root.get(Agenda_.email),
+		criteriaQuery.select(criteriaBuilder.construct(AgendaEstatisticaMedico.class,
 				root.get(Agenda_.medico),
-				root.get(Agenda_.paciente),
-				root.get(Agenda_.data),
-				root.get(Agenda_.hora)));
-
-		LocalDate primeiroDia = mesReferencia.withDayOfMonth(1);
-		LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
+				root.get(Agenda_.paciente)));
 
 		criteriaQuery.where(
-				criteriaBuilder.greaterThanOrEqualTo(root.get(Agenda_.data),
-						primeiroDia),
-				criteriaBuilder.lessThanOrEqualTo(root.get(Agenda_.data),
-						ultimoDia));
+				criteriaBuilder.greaterThanOrEqualTo(root.get(Agenda_.data), 
+						inicio),
+				criteriaBuilder.lessThanOrEqualTo(root.get(Agenda_.data), 
+						fim));
 
-		criteriaQuery.groupBy(
-				root.get(Agenda_.medico),
-				root.get(Agenda_.paciente),
-				root.get(Agenda_.data));
+		criteriaQuery.groupBy(root.get(Agenda_.medico),
+							root.get(Agenda_.paciente));
 
-		TypedQuery<AgendaEstatisticaDia> typedQuery = manager
+		TypedQuery<AgendaEstatisticaMedico> typedQuery = manager
 				.createQuery(criteriaQuery);
 
 		return typedQuery.getResultList();
 	}
+	
 
 	@Override
 	public Page<Agenda> filtrar(AgendaFilter agendaFilter, Pageable pageable) {
