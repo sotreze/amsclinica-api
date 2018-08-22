@@ -6,7 +6,7 @@
 
 <p>Olá!</p>
 
-<p>Existem consultas canceladas para serem verificadas. Veja:</p>
+<p>Existem solicitações cadastradas para serem verificadas. Veja:</p>
 
 <p>
     <table style="width: 100%; border-collapse: collapse;  margin: 20px 0">
@@ -14,6 +14,7 @@
             <tr>
                 <th>Agenda</th>
                 <th>Paciente</th>
+                <th>E-mail</th>
                 <th>Descrição</th>
                 <th>Data da Solicitação</th>
             </tr>
@@ -21,12 +22,13 @@
 
         <tbody>
             <tr style="border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;"
-                th:each="Solicitacao: ${Solicitacoes}"
-                th:styleappend="${solic.consulta} ? 'color: blue;' : 'color: red;'">
-                <td th:text="${solicitacao.agenda.codigo}">1</td>
+                th:each="solicitacao: ${solicitacoes}"
+                th:styleappend="${solicitacao.cancelamento} ? 'color: red;' : 'color: blue;'">
+                <td th:text="${solicitacao.codigo}">1</td>
                 <td th:text="${solicitacao.paciente.nome}">João Silva</td>
+                 <td th:text="${solicitacao.email}">joao.silva@gmail.com</td>
                 <td th:text="${solicitacao.descricao}">Solicito cancelamento da consulta</td>
-                <td th:text="${#temporals.format(solicitacao.data, 'dd/MM/yyyy')}"
+                <td th:text="${#temporals.format(solicitacao.dataSolicitacao, 'dd/MM/yyyy')}"
                     style="text-align: center">10/09/2018</td>
             </tr>
         </tbody>

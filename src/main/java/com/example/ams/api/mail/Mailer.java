@@ -46,7 +46,7 @@ public class Mailer {
 	}*/
 
 	// início refatorar
-	public void avisarSobreConsultasCanceladas(
+	public void avisarSobreSolicitacoesCadastradas(
 			List<Solicitacao> proximas, List<Usuario> destinatarios) {
 		Map<String, Object> variaveis = new HashMap<>();
 		variaveis.put("solicitacoes", proximas);
@@ -57,8 +57,8 @@ public class Mailer {
 
 		this.enviarEmail("sistemaamsclinica@gmail.com",
 				emails,
-				"Lançamentos de consultas canceladas",
-				"mail/aviso-lancamentos-consultas",
+				"Lançamentos de solicitações cadastradas",
+				"mail/aviso-lancamentos-solicitacoes",
 				variaveis);
 	}
 	// fim refatorar

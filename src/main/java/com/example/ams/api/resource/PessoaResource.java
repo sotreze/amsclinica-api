@@ -79,7 +79,7 @@ public class PessoaResource {
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_USUARIO')")
 	public Page<Pessoa> pesquisar(@RequestParam(required = false, defaultValue = "%") String rg, Pageable pageable) {
-		return pessoaRepository.findByRgContaining(rg, pageable);
+		return pessoaRepository.findByRgContainingOrderByCodigoDesc(rg, pageable);
 	}
 
 }

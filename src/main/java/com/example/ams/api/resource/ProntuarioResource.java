@@ -56,7 +56,7 @@ public class ProntuarioResource {
 	private S3 s3;
 	
 	@PostMapping("/anexo")
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO') and #oauth2.hasScope('write')")
 	public Anexo uploadAnexo(@RequestParam MultipartFile anexo) throws IOException {
 		String nome = s3.salvarTemporariamente(anexo);
 		return new Anexo(nome, s3.configurarUrl(nome));
@@ -82,7 +82,7 @@ public class ProntuarioResource {
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Prontuario> criar(@Valid @RequestBody Prontuario prontuario, HttpServletResponse response) {
 		Prontuario prontuarioSalvo = prontuarioService.salvar(prontuario);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, prontuarioSalvo.getCodigo()));
@@ -97,7 +97,7 @@ public class ProntuarioResource {
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO')")
 	public ResponseEntity<Prontuario> atualizar(@PathVariable Long codigo, @Valid @RequestBody Prontuario prontuario) {
 		try {
 			Prontuario prontuarioSalvo = prontuarioService.atualizar(codigo, prontuario);

@@ -78,7 +78,7 @@ public class ExameResource {
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Exame> criar(@Valid @RequestBody Exame exame, HttpServletResponse response) {
 		Exame exameSalvo = exameRepository.save(exame);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, exameSalvo.getCodigo()));
@@ -87,13 +87,13 @@ public class ExameResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		exameRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO')")
 	public ResponseEntity<Exame> atualizar(@PathVariable Long codigo, @Valid @RequestBody Exame exame) {
 		try {
 			Exame exameSalvo = exameService.atualizar(codigo, exame);

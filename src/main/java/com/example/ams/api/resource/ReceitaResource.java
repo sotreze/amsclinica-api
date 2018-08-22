@@ -61,7 +61,7 @@ public class ReceitaResource {
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Receita> criar(@Valid @RequestBody Receita receita, HttpServletResponse response) {
 		Receita receitaSalva = receitaRepository.save(receita);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, receitaSalva.getCodigo()));
@@ -70,13 +70,13 @@ public class ReceitaResource {
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long codigo) {
 		receitaRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO')")
+	@PreAuthorize("hasAuthority('ROLE_MEDICO')")
 	public ResponseEntity<Receita> atualizar(@PathVariable Long codigo, @Valid @RequestBody Receita receita) {
 		try {
 			Receita receitaSalva = receitaService.atualizar(codigo, receita);

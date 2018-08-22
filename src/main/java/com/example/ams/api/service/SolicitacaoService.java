@@ -44,24 +44,26 @@ public class SolicitacaoService {
 
 	//inicio refatorar
 	//@Scheduled(cron = "0 38 9 * * *")
-	@Scheduled(cron = "0 30 23 * * *")
-	public void avisarSobreConsultasCanceladas() {
+	//@Scheduled(cron = "0 30 23 * * *")
+	//@Scheduled(cron = "0 0 8-18 * * *")
+	@Scheduled(cron = "0 59 9,13,18,23 * * *")
+	public void avisarSobreSolicitacoesCadastradas() {
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("Preparando envio de "
 					+ "e-mails de aviso de solicitacões cadastradas pelos usuários.");
 		}
 
-		List<Solicitacao> consultas = solicitacaoRepository
+		List<Solicitacao> solicitacoes = solicitacaoRepository
 				.findByDataSolicitacaoGreaterThanEqual(LocalDate.now());
 
-		if (consultas.isEmpty()) {
+		if (solicitacoes.isEmpty()) {
 			logger.info("Sem solicitacões cadastradas para o aviso.");
 
 			return;
 		}
 
-		logger.info("Exitem {} solicitações cadastradas.", consultas.size());
+		logger.info("Exitem {} solicitações cadastradas.", solicitacoes.size());
 
 		List<Usuario> destinatarios = usuarioRepository
 				.findByPermissoesDescricao(DESTINATARIOS);
@@ -73,7 +75,7 @@ public class SolicitacaoService {
 			return;
 		}
 
-		mailer.avisarSobreConsultasCanceladas(consultas, destinatarios);
+		mailer.avisarSobreSolicitacoesCadastradas(solicitacoes, destinatarios);
 
 		logger.info("Envio de e-mail de solicitação concluído.");
 	}

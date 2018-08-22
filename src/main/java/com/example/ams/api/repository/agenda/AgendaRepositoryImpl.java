@@ -63,9 +63,17 @@ public class AgendaRepositoryImpl implements AgendaRepositoryQuery {
 
 	@Override
 	public Page<Agenda> filtrar(AgendaFilter agendaFilter, Pageable pageable) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaBuilder builder = manager.getCriteriaBuilder();	
+		
 		CriteriaQuery<Agenda> criteria = builder.createQuery(Agenda.class);
 		Root<Agenda> root = criteria.from(Agenda.class);
+		criteria.orderBy(builder.desc(root.get("codigo")));
+
+		/*CriteriaQuery<Foo> criteriaQuery = criteriaBuilder.createQuery(Foo.class);
+		Root<Foo> from = criteriaQuery.from(Foo.class);
+		CriteriaQuery<Foo> select = criteriaQuery.select(from);
+		criteriaQuery.orderBy(criteriaBuilder.asc(from.get("name")));*/
+		
 
 		Predicate[] predicates = criarRestricoes(agendaFilter, builder, root);
 		criteria.where(predicates);
