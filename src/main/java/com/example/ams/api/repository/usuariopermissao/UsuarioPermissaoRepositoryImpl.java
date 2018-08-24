@@ -52,7 +52,8 @@ public class UsuarioPermissaoRepositoryImpl implements UsuarioPermissaoRepositor
 
 		criteria.select(builder.construct(ResumoUsuarioPermissao.class
 				//, root.get(UsuarioPermissao_.codigo) 
-				, root.get(UsuarioPermissao_.usuario)
+				, root.get(UsuarioPermissao_.usuario).get(Usuario_.primeiroNome)
+				, root.get(UsuarioPermissao_.usuario).get(Usuario_.sobrenome)
 				, root.get(UsuarioPermissao_.permissao)));
 
 		Predicate[] predicates = criarRestricoes(usuarioPermissaoFilter, builder, root);
@@ -67,6 +68,11 @@ public class UsuarioPermissaoRepositoryImpl implements UsuarioPermissaoRepositor
 	private Predicate[] criarRestricoes(UsuarioPermissaoFilter usuarioPermissaoFilter, CriteriaBuilder builder,
 			Root<UsuarioPermissao> root) {
 		List<Predicate> predicates = new ArrayList<>();
+		
+		if (usuarioPermissaoFilter.getCodigo() != null) {
+			predicates.add(
+				builder.equal(root.get(UsuarioPermissao_.codigo), usuarioPermissaoFilter.getCodigo()));
+		}
 
 		if (!StringUtils.isEmpty(usuarioPermissaoFilter.getUsuario())) {
 			predicates.add(builder.like(

@@ -9,5 +9,6 @@ CREATE TABLE pessoa (
 	cidade VARCHAR(30),
 	estado VARCHAR(30),
 	ativo BOOLEAN NOT NULL,
-	telefone VARCHAR(20) NOT NULL
+	telefone VARCHAR(20) NOT NULL,
+	UNIQUE (rg)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
