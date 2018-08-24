@@ -22,11 +22,11 @@ CREATE TABLE usuario_permissao (
 	FOREIGN KEY (codigo_permissao) REFERENCES permissao(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (1, 'Maria', 'Silva', 'maria.silva@yahoo.com.br', 1, '$2a$10$xffrkypTVgjwGmlcW7hnZua.gFXyviRB8SY4n65pUM4wbjYKNf/9G');
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (2, 'Fernanda', 'Alves', 'fernanda.alves@ams.com.br', 1, '$2a$10$cEsoa2r8VCp4WMQkFt/fp.vBfP5UfDiMPV8r20ZIKgMCwC6bqo12C');
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (3, 'Isabela', 'Silva',  'isabela.silva@ams.com.br', 1, '$2a$10$YiIaGbqcCkhho9Gyrum.Lu4rmGlymacZdZA6UFh.X9jAVHHNfWnE6');
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (4, 'Adonildo', 'Filho',  'adonildo.filho@ams.com.br', 1, '$2a$10$USHMFxpP0xRhdBEwG/iLreWHZvQcRHcpeXm8vVNyN07oBDGaBra3W');
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (5, 'Márcio', 'Sousa',  'sotreze@yahoo.com.br', 1, '$2a$10$v25AqJzi1g4lxu85Pz4K..gOB0z9EN7lv2ySIozyoEDRM4KDxT00.');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (1, 'Maria', 'Silva', 'maria.silva@yahoo.com.br', 1, '$2a$10$O./vnB3c.0PMWdi73EDpKuIOykpW9Q3aqBhcPbyncqboRG8iLN1WW');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (2, 'Fernanda', 'Alves', 'fernanda.alves@ams.com.br', 1, '$2a$10$2luCxPL0Twy6wEclHKxiv.U6g/RIZAzHX5lUkut.V4sUhU1zAiQfy');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (3, 'Isabela', 'Silva',  'isabela.silva@ams.com.br', 1, '$2a$10$DloQ.LBta0bD48yfrjs4O.h5qHYVX6stzmRgujGvOUFxpeGmx/hgS');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (4, 'Adonildo', 'Filho',  'adonildo.filho@ams.com.br', 1, '$2a$10$6wKzZLArzXd7vlUKhHZdse.bjFqI4UjXYt0NddwRsSLcmU5Mv0q72');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (5, 'Márcio', 'Sousa',  'sotreze@yahoo.com.br', 1, '$2a$10$oKE64xxX50on0n8XbfHIT.XcbwzglgFyNQwqfJMEk2TqjAxdecAvy');
 
 INSERT INTO permissao (codigo, descricao) values (1, 'ROLE_USUARIO');
 INSERT INTO permissao (codigo, descricao) values (2, 'ROLE_FUNCIONARIO');
