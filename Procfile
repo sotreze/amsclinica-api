@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.profiles.active=oauth-security,prod $JAVA_OPTS -jar target/ams*.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -Dspring.profiles.active=prod -jar target/ams*.jar
