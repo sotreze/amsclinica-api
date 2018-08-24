@@ -3,7 +3,7 @@ CREATE TABLE prontuario (
 	anexo VARCHAR(200),
 	codigo_paciente BIGINT(20),
 	codigo_medico BIGINT(20),
-	relatorio VARCHAR(600),
+	relatorio VARCHAR(400),
 	FOREIGN KEY (codigo_paciente) REFERENCES paciente(codigo),
 	FOREIGN KEY (codigo_medico) REFERENCES medico(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
