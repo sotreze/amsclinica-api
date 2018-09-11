@@ -7,7 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -29,22 +32,13 @@ public class Medico {
 	
 	@NotNull
 	private String crm;
-
+	
+	private Boolean ativo = false;
 
 	@OneToOne(orphanRemoval = true)
 	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 	
-	//@NotNull
-	/*@OneToOne
-	@JoinColumn(name = "codigo_agenda")
-	private Agenda agenda;*/
-	
-	/*@JsonIgnoreProperties("medico")
-	@Valid
-	@OneToMany(mappedBy = "medico", cascade = CascadeType.ALL,
-			orphanRemoval = true)
-	private List<Agenda> agendas;*/
 
 	public Long getCodigo() {
 		return codigo;
@@ -86,6 +80,14 @@ public class Medico {
 	public void setCrm(String crm) {
 		this.crm = crm;
 	}
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -95,22 +97,12 @@ public class Medico {
 		this.pessoa = pessoa;
 	}	
 	
-	/*public Agenda getAgenda() {
-		return agenda;
-	}
 
-	public void setAgenda(Agenda agenda) {
-		this.agenda = agenda;
-	}*/
-	
-	/*public List<Agenda> getAgendas() {
-		return agendas;
+	@JsonIgnore
+	@Transient
+	public boolean isInativo() {
+		return !this.ativo;
 	}
-	
-	public void setAgendas(List<Agenda> agendas) {
-		this.agendas = agendas;
-	}*/
-
 
 	@Override
 	public int hashCode() {

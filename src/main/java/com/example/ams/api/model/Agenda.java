@@ -1,7 +1,8 @@
 package com.example.ams.api.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -31,7 +32,8 @@ public class Agenda {
 	
 	private LocalDate data;
 	
-	private String hora;
+	//private String hora;
+	private LocalTime hora;
 	
 	private Boolean ativo = true;
 		
@@ -45,12 +47,12 @@ public class Agenda {
 	private Paciente paciente;
 	
 	@Column(name = "data_agendamento")
-	private LocalDateTime dataAgendamento;
+	private LocalDate dataAgendamento = LocalDate.now();
 	
-	@OneToOne
-	@JoinColumn(name = "hora_horario")
-	private Horario horario;
+	@Column(name = "hora_agendamento")
+	private LocalTime horaAgendamento = LocalTime.now();
 	
+
 	
 	public Long getCodigo() {
 		return codigo;
@@ -76,15 +78,14 @@ public class Agenda {
 		this.data = data;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
-	
-	public void setHora(String hora) {
+
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
-
-
+	
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -109,20 +110,27 @@ public class Agenda {
 		this.paciente = paciente;
 	}
 	
-	public LocalDateTime getDataAgendamento() {
+	/*public LocalDateTime getDataAgendamento() {
 		return dataAgendamento;
 	}
 
 	public void setDataAgendamento(LocalDateTime dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
+	}*/
+	public LocalDate getDataAgendamento() {
+		return dataAgendamento;
+	}
+	
+	public void setDataAgendamento(LocalDate dataAgendamento) {
+		this.dataAgendamento = dataAgendamento;
+	}
+	
+	public LocalTime getHoraAgendamento() {
+		return horaAgendamento;
 	}
 
-	public Horario getHorario() {
-		return horario;
-	}
-
-	public void setHorario(Horario horario) {
-		this.horario = horario;
+	public void setHoraAgendamento(LocalTime horaAgendamento) {
+		this.horaAgendamento = horaAgendamento;
 	}
 
 	@JsonIgnore

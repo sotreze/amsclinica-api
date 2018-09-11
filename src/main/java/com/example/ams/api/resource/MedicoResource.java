@@ -103,5 +103,12 @@ public class MedicoResource {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	@PutMapping("/{codigo}/ativo")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('write')")
+	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
+		medicoService.atualizarPropriedadeAtivo(codigo, ativo);
+	}
 
 }

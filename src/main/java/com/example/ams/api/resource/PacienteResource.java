@@ -72,7 +72,8 @@ public class PacienteResource {
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_FUNCIONARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Paciente> criar(@Valid @RequestBody Paciente paciente, HttpServletResponse response) {
-		Paciente pacienteSalvo = pacienteRepository.save(paciente);
+		//Paciente pacienteSalvo = pacienteRepository.save(paciente);
+		Paciente pacienteSalvo = pacienteService.salvar(paciente);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, pacienteSalvo.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(pacienteSalvo);
 	}

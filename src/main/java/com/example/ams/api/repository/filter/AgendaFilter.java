@@ -1,6 +1,7 @@
 package com.example.ams.api.repository.filter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,16 +16,15 @@ public class AgendaFilter {
 	
 	private String paciente;
 	
-	private String horario;
-	
 	private String medico;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate data;
 	
 	//@DateTimeFormat(pattern = "HH:mm")
-	private String hora;
-	
+	//private String hora;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalTime hora;
 	
 	public Long getCodigo() {
 		return codigo;
@@ -57,14 +57,6 @@ public class AgendaFilter {
 	public void setPaciente(String paciente) {
 		this.paciente = paciente;
 	}
-	
-	public String getHorario() {
-		return horario;
-	}
-
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
 
 	public String getMedico() {
 		return medico;
@@ -82,12 +74,20 @@ public class AgendaFilter {
 		this.data = data;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
+		return hora;
+	}
+
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
+	}
+
+	/*public String getHora() {
 		return hora;
 	}
 
 	public void setHora(String hora) {
 		this.hora = hora;
-	}
+	}*/
 		
 }

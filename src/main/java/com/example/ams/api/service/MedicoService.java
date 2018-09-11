@@ -2,6 +2,7 @@ package com.example.ams.api.service;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.ams.api.model.Medico;
@@ -32,19 +33,20 @@ public class MedicoService {
 	}
 
 	public Medico atualizar(Long codigo, Medico medico) {
-		Medico medicoSalvo = buscarMedicoExistente(codigo);
+		Medico medicoSalvo = buscarMedicoPeloCodigo(codigo);
 		if (!medico.getPessoa().equals(medicoSalvo.getPessoa())) {
 			validarPessoa(medico);
 		}
 		
-		/*medicoSalvo.getAgendas().clear();
-		medicoSalvo.getAgendas().addAll(medico.getAgendas());
-		medicoSalvo.getAgendas().forEach(c -> c.setMedico(medicoSalvo));
-		BeanUtils.copyProperties(medico, medicoSalvo, "codigo", "agendas");*/
-		
 		BeanUtils.copyProperties(medico, medicoSalvo, "codigo");
 
 		return medicoRepository.save(medicoSalvo);
+	}
+	
+	public void atualizarPropriedadeAtivo(Long codigo, Boolean ativo) {
+		Medico medicoSalvo = buscarMedicoPeloCodigo(codigo);
+		medicoSalvo.setAtivo(ativo);
+		medicoRepository.save(medicoSalvo);
 	}
 
 	private void validarPessoa(Medico medico) {
@@ -58,10 +60,18 @@ public class MedicoService {
 		}
 	}
 
-	private Medico buscarMedicoExistente(Long codigo) {
+	public Medico buscarMedicoExistente(Long codigo) {
 		Medico medicoSalvo = medicoRepository.findOne(codigo);
 		if (medicoSalvo == null) {
 			throw new IllegalArgumentException();
+		}
+		return medicoSalvo;
+	}
+	
+	public Medico buscarMedicoPeloCodigo(Long codigo) {
+		Medico medicoSalvo = medicoRepository.findOne(codigo);
+		if (medicoSalvo == null) {
+			throw new EmptyResultDataAccessException(1);
 		}
 		return medicoSalvo;
 	}

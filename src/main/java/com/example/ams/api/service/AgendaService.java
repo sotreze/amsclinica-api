@@ -16,9 +16,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.ams.api.dto.AgendaEstatisticaMedico;
 import com.example.ams.api.model.Agenda;
-import com.example.ams.api.model.Pessoa;
+import com.example.ams.api.model.Medico;
 import com.example.ams.api.repository.AgendaRepository;
-import com.example.ams.api.service.exception.PessoaInexistenteOuInativaException;
+import com.example.ams.api.repository.MedicoRepository;
+import com.example.ams.api.service.exception.MedicoInexistenteOuInativoException;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -28,7 +29,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class AgendaService {
-
+	
+	
+	@Autowired
+	private MedicoRepository medicoRepository;
 
 	@Autowired
 	private AgendaRepository agendaRepository;
@@ -52,15 +56,19 @@ public class AgendaService {
 	}
 
 	public Agenda salvar(Agenda agenda) {
-		validarMedico(agenda);    
-	    return agendaRepository.save(agenda);
+		
+		validarMedico(agenda);	
+		validarHora(agenda);
+		
+		return agendaRepository.save(agenda);		
 	}
 
 	public Agenda atualizar(Long codigo, Agenda agenda) {
 		Agenda agendaSalva = buscarAgendaPeloCodigo(codigo);
-		/*if (!agenda.getMedico().equals(agendaSalva.getMedico())) {
+		if (!agenda.getMedico().equals(agendaSalva.getMedico())) {
 			validarMedico(agenda);
-		}*/
+			validarHora(agenda);
+		}
 
 		BeanUtils.copyProperties(agenda, agendaSalva, "codigo");
 		return agendaRepository.save(agendaSalva);
@@ -73,13 +81,14 @@ public class AgendaService {
 	}
 
 	private void validarMedico(Agenda agenda) {
-		Pessoa pessoa = null;
-		/*if (agenda.getMedico().getCodigo() != null) {
-			pessoa = medicoRepository.findOne(agenda.getMedico().getCodigo());
-		}*/
+		Medico medico = null;
+		
+		if (agenda.getMedico().getCodigo() != null) {
+			medico = medicoRepository.findOne(agenda.getMedico().getCodigo());
+		}
 
-		if (pessoa == null || pessoa.isInativo()) {
-			throw new PessoaInexistenteOuInativaException();
+		if (medico == null || medico.isInativo()) {
+			throw new MedicoInexistenteOuInativoException();
 		}
 	}
 
@@ -91,4 +100,14 @@ public class AgendaService {
 		return agendaSalva;
 	}
 	
+	private void validarHora(Agenda agenda) {
+		
+	      if ( agenda.getHora().isBefore(agenda.getHoraAgendamento())) {
+	    	 if ( agenda.getData().compareTo(agenda.getDataAgendamento()) == 0) { 
+	    	  //throw new IllegalArgumentException("Agenda não disponível");
+	    		 throw new MedicoInexistenteOuInativoException();
+	    	 }
+	       }
+	
+	}
 }

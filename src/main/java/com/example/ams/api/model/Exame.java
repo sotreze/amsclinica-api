@@ -22,10 +22,8 @@ public class Exame {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
-	//private Long quantidade = (long) 1;
 	@NotNull
 	private BigDecimal quantidade = new BigDecimal("1");
-	//private BigDecimal quantidade;
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_medico")
@@ -48,14 +46,6 @@ public class Exame {
 	public Long getCodigo() {
 		return codigo;
 	}
-	
-	/*public Long getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Long quantidade) {
-		this.quantidade = quantidade;
-	}*/
 	
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;

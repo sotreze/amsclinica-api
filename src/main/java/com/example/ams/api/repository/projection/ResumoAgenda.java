@@ -1,7 +1,8 @@
 package com.example.ams.api.repository.projection;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 public class ResumoAgenda {
@@ -10,12 +11,14 @@ public class ResumoAgenda {
 	private Boolean ativo;
 	private String email;
 	private LocalDate data;
-	private String hora;
+	//private String hora;
+	private LocalTime hora;
 	private String paciente;
 	private String medico;
-	private LocalDateTime dataAgendamento;
+	private LocalDate dataAgendamento;
+	private LocalTime horaAgendamento;
 
-	public ResumoAgenda(Long codigo, Boolean ativo, String email, LocalDate data, String hora, String medico, String paciente, LocalDateTime dataAgendamento) {
+	public ResumoAgenda(Long codigo, Boolean ativo, String email, LocalDate data, LocalTime hora, String medico, String paciente, LocalDate dataAgendamento, LocalTime horaAgendamento) {
 		super();
 		this.codigo = codigo;
 		this.ativo = ativo;
@@ -25,6 +28,7 @@ public class ResumoAgenda {
 		this.paciente = paciente;
 		this.medico = medico;
 		this.dataAgendamento = dataAgendamento;
+		this.horaAgendamento = horaAgendamento;
 	}
 
 
@@ -59,14 +63,24 @@ public class ResumoAgenda {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-
-	public String getHora() {
+	
+	/*public String getHora() {
 		return hora;
 	}
 
 	public void setHora(String hora) {
 		this.hora = hora;
+	}*/
+
+	public LocalTime getHora() {
+		return hora;
 	}
+
+
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
+	}
+
 
 	public String getPaciente() {
 		return paciente;
@@ -84,12 +98,20 @@ public class ResumoAgenda {
 		this.medico = medico;
 	}
 
-	public LocalDateTime getDataAgendamento() {
+	public LocalDate getDataAgendamento() {
 		return dataAgendamento;
 	}
 
-	public void setDataAgendamento(LocalDateTime dataAgendamento) {
+	public void setDataAgendamento(LocalDate dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
 	}
 
+	public LocalTime getHoraAgendamento() {
+		return horaAgendamento;
+	}
+
+	public void setHoraAgendamento(LocalTime horaAgendamento) {
+		this.horaAgendamento = horaAgendamento;
+	}
+	
 }

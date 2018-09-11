@@ -22,18 +22,10 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	/*@NotNull
-	private String nome;*/
-	
-	//private String cpf;
 	private String rg;
 
 	@Embedded
 	private Endereco endereco;
-
-	/*@NotNull
-	@Enumerated(EnumType.STRING)
-	private TipoPessoa tipo;*/
 
 	@NotNull
 	private Boolean ativo;
@@ -80,14 +72,6 @@ public class Pessoa {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
-	/*public TipoPessoa getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoPessoa tipo) {
-		this.tipo = tipo;
-	}*/
 
 
 	@JsonIgnore

@@ -51,6 +51,7 @@ public class MedicoRepositoryImpl implements MedicoRepositoryQuery {
 
 		criteria.select(builder.construct(ResumoMedico.class
 				, root.get(Medico_.codigo)
+				, root.get(Medico_.ativo)
 				, root.get(Medico_.nome)
 				, root.get(Medico_.cpf)
 				, root.get(Medico_.especializacao)

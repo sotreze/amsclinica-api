@@ -2,12 +2,15 @@ package com.example.ams.api.resource;
 
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,13 +30,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.MessageSource;
 
 import com.example.ams.api.event.RecursoCriadoEvent;
+import com.example.ams.api.exceptionhandler.AmsExceptionHandler.Erro;
 import com.example.ams.api.model.Agenda;
 import com.example.ams.api.repository.AgendaRepository;
 import com.example.ams.api.repository.filter.AgendaFilter;
 import com.example.ams.api.repository.projection.ResumoAgenda;
 import com.example.ams.api.service.AgendaService;
+import com.example.ams.api.service.exception.MedicoInexistenteOuInativoException;
 
 
 @RestController
@@ -48,8 +55,8 @@ public class AgendaResource {
 	@Autowired
 	private ApplicationEventPublisher publisher;
 
-	/*@Autowired
-	private MessageSource messageSource;*/
+	@Autowired
+	private MessageSource messageSource;
 	
 
 	@GetMapping("/relatorios/por-medico")
@@ -86,9 +93,18 @@ public class AgendaResource {
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_USUARIO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Agenda> criar(@Valid @RequestBody Agenda agenda, HttpServletResponse response) {
-		Agenda agendaSalva = agendaRepository.save(agenda);
+		//Agenda agendaSalva = agendaRepository.save(agenda);
+		Agenda agendaSalva = agendaService.salvar(agenda);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, agendaSalva.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(agendaSalva);
+	}
+	
+	@ExceptionHandler({ MedicoInexistenteOuInativoException.class })
+	public ResponseEntity<Object> handleMedicoInexistenteOuInativoException(MedicoInexistenteOuInativoException ex) {
+		String mensagemUsuario = messageSource.getMessage("medico.inexistente-ou-inativo", null, LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor = ex.toString();
+		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		return ResponseEntity.badRequest().body(erros);
 	}
 
 	@DeleteMapping("/{codigo}")

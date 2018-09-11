@@ -7,6 +7,8 @@ public class AmsApiProperty {
 
 	private String originPermitida = "http://localhost:8000";
 
+	//private String originPermitida = "https://amsclinica.cfapps.io";
+
 	private final Seguranca seguranca = new Seguranca();
 
 	private final Mail mail = new Mail();

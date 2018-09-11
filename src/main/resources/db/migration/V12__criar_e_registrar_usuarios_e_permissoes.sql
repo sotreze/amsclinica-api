@@ -23,8 +23,8 @@ CREATE TABLE usuario_permissao (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (1, 'Maria', 'Silva', 'maria.silva@yahoo.com.br', 1, '$2a$10$O./vnB3c.0PMWdi73EDpKuIOykpW9Q3aqBhcPbyncqboRG8iLN1WW');
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (2, 'Fernanda', 'Alves', 'fernanda.alves@ams.com.br', 1, '$2a$10$2luCxPL0Twy6wEclHKxiv.U6g/RIZAzHX5lUkut.V4sUhU1zAiQfy');
-INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (3, 'Isabela', 'Silva',  'isabela.silva@ams.com.br', 1, '$2a$10$DloQ.LBta0bD48yfrjs4O.h5qHYVX6stzmRgujGvOUFxpeGmx/hgS');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (2, 'Fernanda', 'Alves', 'fernanda.alves@ams.com.br', 1, '$2a$10$nXmt5/bJWC.dW4PtEzy3auwRTCOwoPjMoQVGAjuJqGn8iV0Y4pe6m');
+INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (3, 'Isabela', 'Silva',  'isabela.silva@ams.com.br', 1, '$2a$10$0r7MtQli2RzHw3oVCUckceF7Cjs81eZ/cw70a4/oh4ksPL3kuBlMq');
 INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (4, 'Adonildo', 'Filho',  'adonildo.filho@ams.com.br', 1, '$2a$10$6wKzZLArzXd7vlUKhHZdse.bjFqI4UjXYt0NddwRsSLcmU5Mv0q72');
 INSERT INTO usuario (codigo, primeiro_nome, sobrenome, email, ativo, senha) values (5, 'Márcio', 'Sousa',  'sotreze@yahoo.com.br', 1, '$2a$10$oKE64xxX50on0n8XbfHIT.XcbwzglgFyNQwqfJMEk2TqjAxdecAvy');
 
