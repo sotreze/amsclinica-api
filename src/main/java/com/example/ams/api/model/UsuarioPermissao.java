@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UsuarioPermissao {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
 	@JsonIgnoreProperties({"permissoes", "senha", "email"})

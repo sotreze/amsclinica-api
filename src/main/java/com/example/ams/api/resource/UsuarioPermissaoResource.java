@@ -52,6 +52,7 @@ public Page<UsuarioPermissao> pesquisar(UsuarioPermissaoFilter usuarioPermissaoF
 	return usuarioPermissaoRepository.filtrar(usuarioPermissaoFilter, pageable);
 }
 
+
 @GetMapping(params = "resumo")
 @PreAuthorize("hasAuthority('ROLE_ADMINISTRADOR') and #oauth2.hasScope('read')")
 public Page<ResumoUsuarioPermissao> resumir(UsuarioPermissaoFilter usuarioPermissaoFilter, Pageable pageable) {

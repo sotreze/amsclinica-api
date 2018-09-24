@@ -18,6 +18,10 @@ target/
 
 .springBeans
 
+application.properties
+
+application-prod.properties
+
 
 
 ### IntelliJ IDEA ###

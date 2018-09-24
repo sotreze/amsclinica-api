@@ -69,6 +69,11 @@ public class UsuarioPermissaoRepositoryImpl implements UsuarioPermissaoRepositor
 			Root<UsuarioPermissao> root) {
 		List<Predicate> predicates = new ArrayList<>();
 		
+		if (!StringUtils.isEmpty(usuarioPermissaoFilter.getUsuario())) {
+			predicates.add(builder.like(
+					builder.lower(root.get(UsuarioPermissao_.usuario).get(Usuario_.primeiroNome)), "%" + usuarioPermissaoFilter.getUsuario().toLowerCase() + "%"));
+		}
+		
 		if (usuarioPermissaoFilter.getCodigo() != null) {
 			predicates.add(
 				builder.equal(root.get(UsuarioPermissao_.codigo), usuarioPermissaoFilter.getCodigo()));
@@ -77,11 +82,6 @@ public class UsuarioPermissaoRepositoryImpl implements UsuarioPermissaoRepositor
 		if (!StringUtils.isEmpty(usuarioPermissaoFilter.getUsuario())) {
 			predicates.add(builder.like(
 					builder.lower(root.get(UsuarioPermissao_.usuario).get(Usuario_.email)), "%" + usuarioPermissaoFilter.getUsuario().toLowerCase() + "%"));
-		}
-		
-		if (!StringUtils.isEmpty(usuarioPermissaoFilter.getUsuario())) {
-			predicates.add(builder.like(
-					builder.lower(root.get(UsuarioPermissao_.usuario).get(Usuario_.primeiroNome)), "%" + usuarioPermissaoFilter.getUsuario().toLowerCase() + "%"));
 		}
 		
 		if (!StringUtils.isEmpty(usuarioPermissaoFilter.getUsuario())) {
